@@ -1,0 +1,21 @@
+<div id="pagination"> 
+	
+	<% if @braggings.size == 0 %>
+		&nbsp
+	<% end %>
+	
+	<div class="standard-padding brag-page">
+		<div class="brag-page-name heading">Name</div><div class="brag-page-score heading">Score</div><div class="brag-page-awards heading">Awards</div>
+		<% @braggings.each_with_index do |user, index| %>
+			<div class="brag-page-name"><%= index + 1 %>. <%= user.display_name %></div><div class="brag-page-score"><%= user.wallet.score %> points</div>
+			<div class="brag-page-awards">
+				<% for award in user.wallet.awards %>
+					<span class='<%= award.name.downcase %>'><%= image_tag("#{award.name.downcase}.png", :size => "27x27", :alt => award.name, :title => award.name, :class => 'preview') %></span>
+				<% end %>
+			</div>
+		<% end %>
+	</div>	
+
+<%= will_paginate @braggings, :params => {:controller => "bragging", :action => "index"} %>
+
+</div>

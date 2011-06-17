@@ -1,0 +1,2 @@
+module BetCategoriesHelper
+end

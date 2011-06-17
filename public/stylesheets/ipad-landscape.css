@@ -1,0 +1,208 @@
+@font-face {
+  font-family: 'Molengo';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/stylesheets/Molengo-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Chewy';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/stylesheets/Chewy.ttf');
+}
+
+body
+{
+	font-size: 17px;
+	font-family: 'Molengo', arial, serif; 
+}
+
+a {
+  	color: #666;
+	font-size: 17px;
+	font-style: normal;
+	font-family: 'Chewy', Verdana, Helvetica, Arial;
+}
+
+#main-page
+{
+  min-width: 1024px;
+  padding-top:30px;
+}
+#inner-page 
+{
+  width: 1024px;
+  border-top-right-radius:10px;
+  border-top-left-radius:10px;
+}
+#head-menu
+{
+	width: 984px;
+	border-top-right-radius:10px;
+	border-top-left-radius:10px;
+}
+
+#container
+{
+	width: 984px;
+}
+
+#container-left
+{
+	width: 784px;
+	float:left;
+}
+
+#container-right
+{
+	float:left;
+	width:200px;
+	height:100%;
+	padding-top:50px;
+}
+#logo-title
+{
+	padding:0 0 0 100px;
+}
+.line
+{
+    width: 1024px;
+}
+.footer
+{
+    width: 100%;
+}
+.center-inner
+{
+	width:754px;
+}
+#previews
+{
+	width:754px;	
+}
+.bet-panel-small
+{
+	width: 380px;
+	min-height:170px;
+}
+.even
+{
+	margin-right:15px;
+}
+.odd
+{
+	margin-left:15px;
+}
+.bet-panel, .bet-panel-small
+{
+	padding:10px 10px 10px 10px;
+}
+
+.bet-title, .bet-title a
+{
+	font-weight:bold;
+	font-family: 'MolengoRegular', arial, serif; 
+	color:black;
+}
+
+.bet-display-name a
+{
+	font-size:15px;
+}
+
+.search input[type="search"]
+{
+	width:210px;
+}
+.bet-display-name-line
+{
+	margin-top:10px;
+}
+#container-right
+{
+	display:inline !important;
+}
+
+.back
+{
+	position:absolute;
+	top:30px;
+	left:20px;
+}
+
+p.inline-errors
+{
+	border-bottom: 1px dotted #000000 !important; 
+	color: #000000 !important; 
+	outline: none !important;
+	position: relative !important;
+	border-radius: 5px 5px !important; 
+	-moz-border-radius: 5px !important; 
+	-webkit-border-radius: 5px !important; 
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1) !important; 
+	-webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1) !important; 
+	-moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1) !important;
+	font-family: Calibri, Tahoma, Geneva, sans-serif !important;
+	font-weight:bold;
+	margin-top: 10px !important;
+	width: 250px !important;
+	background: #FFFFAA !important; 
+	border: 1px solid #FFAD33 !important;
+	padding:6px 0 !important;
+	text-align:center !important;
+	vertical-align:center;
+}
+
+p.inline-errors:before {
+    content: "";
+	display: block;
+	position: absolute;
+	top: -27px;
+	left: 25px;
+	width: 0;
+	height: 0;
+	border: 13px solid transparent;
+	border-bottom-color: #FFAD33;
+}
+
+p.inline-errors:after {
+    content: "";
+	display: block;
+	position: absolute;
+	top: -25px;
+	left: 25px;
+	width: 0;
+	height: 0;
+	border: 13px solid transparent;
+	border-bottom-color: #FFFFAA;
+}
+
+.points-outer
+{
+	display: inline-block;
+	width:100px;
+	height:23px;
+	background: #F0F8FF;
+	text-shadow: white 2px 2px 2px;
+	text-decoration: none !important;
+	font-family: arial;
+	font-size: .9em;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	font-size: 1em;
+	font-family: Georgia, Times, serif;
+	-webkit-box-shadow: 2px 3px 6px 0.9px grey;
+    -moz-box-shadow: 2px 3px 6px 0.9px grey;
+    box-shadow: 2px 3px 6px 0.9px grey;
+/*	border:1px solid black;*/
+}
+
+.points-inner
+{
+	background: #F08080;
+	height:23px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}

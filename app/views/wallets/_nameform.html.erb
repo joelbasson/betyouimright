@@ -1,0 +1,8 @@
+<%= form_tag wallet_updatename_path, :method => :get, :remote => true do |f| %>
+
+	<p><%= label_tag :display_name, "Display Name" %>
+	   <%= text_field_tag :display_name, params[:display_name] %>
+	   <%= submit_tag 'Change', :name => nil %>
+	</p>
+	
+<% end %>

@@ -1,0 +1,15 @@
+<% cache("bet-#{@bet.id}-wagers", :expires_in => 1.day) do %>
+	<div id="wagers-pagination" class="wagers"> 
+		
+		<% if @wagers %>
+			<% if @wagers.size == 0 %>
+				&nbsp
+			<% end %>
+	
+			<% (@wagers.group_by { |w| w.user }).each do |user, wagers| %>
+			  <span class="bold"><%= user.display_name %></span> has wagered <%= pluralize(wagers.size, 'time') %> on this bet</span><br />
+			<% end %>
+		<% end %>
+	
+	</div>
+<% end %>

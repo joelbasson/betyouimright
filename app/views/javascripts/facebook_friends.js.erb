@@ -1,0 +1,74 @@
+<% if session[:facebook_friends_list] %>
+	friendsList = "<%= session[:facebook_friends_list] %>"
+	friendsHtml = "<%= raw session[:facebook_friends_html] %>"
+<% else %>
+	var friendsList;
+	var friendsHtml;
+<% end %>
+	var friendsLimit = 10;
+
+function getAppFriends(){
+	FB.api(
+	  {
+	    method: 'friends.getAppUsers'
+	  },
+	  function(response) {
+		var outputHtml = "";
+		var count = 0;
+		var error = false;
+		jQuery.each(response, function() {
+			if (response['error_code'] == 104){
+				error = true;
+				return false;
+			}
+			outputHtml = outputHtml + "<fb:profile-pic uid='" + this + "' size='square'></fb:profile-pic>";
+			count++;
+			return (count < friendsLimit);
+		});
+		if (error == true)
+		{
+			$("#friends").html("<em>You need to log into Facebook first</em>");
+			return true;
+		}
+		friendsList = response;
+		friendsHtml = outputHtml + "<p>Showing " + count + " of " + response.length + " friends</p>";
+		saveFriendsList();
+		saveFriendsHtml();
+		displayFBFriends();
+	  }
+	);
+};
+
+function saveFriendsList(){
+	$.ajax({
+			type		: "POST",
+			cache	: false,
+			dataType : 'script',
+			url		: "/javascripts/cache_fb_friends.js?friendsList=" + friendsList.toString()
+		});
+};
+
+function saveFriendsHtml(){
+	$.ajax({
+		type		: "POST",
+		cache	: false,
+		dataType : 'script',
+		url		: "/javascripts/cache_fb_friends_html.js?friendsHtml=" + friendsHtml.toString()
+	});		
+};
+
+function displayFBFriends() {
+      	$("#friends").html(friendsHtml);
+		FB.XFBML.parse();
+};
+
+function getFBFriends() {
+      	if ($("#friends").length>0)
+		{
+			<% if !session[:facebook_friends_list] %>
+				getAppFriends();
+			<% else %>
+				displayFBFriends();
+			<% end %>
+		};
+};

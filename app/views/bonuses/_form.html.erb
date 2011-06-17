@@ -1,0 +1,17 @@
+<%= semantic_form_for @bonus do |f| %>
+  <%= error_div_for @bonus %>
+  <%= error_messages_for(@bonus)  %>
+  <%= f.inputs do %>
+	<%= f.input :name, :input_html => { :placeholder => "e.g Go Big or Go Home" } %>
+	<%= f.input :short_description, :input_html => { :placeholder => "e.g 5 extra credits for a brave bet" } %>
+	<%= f.input :description, :input_html => { :rows => 10, :cols => 10, :maxlength => 500, :placeholder => "e.g If the bet creator wins a bet where the losers outnumber the winners by a factor of 10, he wins an extra 5 credits" } %>
+	<%= f.input :rule %>
+	<%= f.input :rule_description %>
+	<%= f.input :bonustype, :as => :select, :collection => Bonus.bonus_types, :include_blank => false  %>
+	<%= f.input :activation, :as => :select, :collection => Bonus.activation_types, :include_blank => false  %>
+	<%= f.input :credits %>
+	<%= f.input :target %>
+	<%= f.input :beneficiary, :as => :select, :collection => Bonus.beneficiary_types, :include_blank => false  %>
+  <% end %>	
+  <%= f.buttons %>
+<% end %>

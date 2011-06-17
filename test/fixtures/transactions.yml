@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  wallet_id: 1
+  description: MyString
+  bet_id: 1
+
+two:
+  wallet_id: 1
+  description: MyString
+  bet_id: 1

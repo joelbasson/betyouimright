@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<style type="text/css">
+	body
+	{
+		font-size: 17px;
+	}
+	#previews
+	{
+		margin: 0 auto;
+		padding-left:20px;
+		padding-right:10px;
+	}
+
+	.bet-panel, .bet-panel-small
+	{
+		margin-bottom:25px;
+	    float:left;
+	}
+
+	.bet-panel
+	{
+		clear: both;
+		width: 700px;
+	}
+
+	.won
+	{
+		opacity: .3;
+	}
+
+	.bet-title, .bet-title a
+	{
+		text-align:center;
+		padding-bottom:10px;
+		font-weight:bold;
+		font-family: 'Molengo', arial, serif; 
+		color:black;
+	}
+	
+	.spacer
+	{
+		padding: 10px 0;
+	}
+	
+	.clear {
+	  clear: both;
+	  height: 0;
+	  overflow: hidden;
+	}
+	
+	.bet-panel-small
+	{
+		padding: 10px 10px 10px 10px;
+		height: 190px;
+		width: 380px;
+		background: #fff;
+		box-shadow: 0px 0px 7px #248cab;
+		-webkit-box-shadow: 0px 0px 7px #248cab;
+		-moz-box-shadow: 0px 0px 7px #248cab;
+		-moz-border-radius: 15px;
+		border-radius: 10px;
+		border-top-left-radius: 10px 10px;
+		border-top-right-radius: 10px 10px;
+		border-bottom-right-radius: 10px 10px;
+		border-bottom-left-radius: 10px 10px;
+	    position:relative;
+	}
+
+	.bet-end-date
+	{
+		float:left;
+		margin-top:10px;
+		font-style:italic;
+	}
+
+	.bet-display-name-line
+	{
+		font-size:smaller;
+		float:left;
+		width:45%;
+	}
+
+	.bet-display-name
+	{
+		font-weight:bold;
+	}
+
+	.bet-display-name a
+	{
+		font-size:15px;
+	}
+
+	.sort-links
+	{
+		text-align:center;
+	}
+
+	.bet-wager-info
+	{
+		float:right;
+		font-size:70%;
+		margin-top:10px;
+	}
+
+	.bet-status
+	{
+		font-weight:bold;
+		font-style:italic;
+		font-size:larger;
+		color:#CD4F39;
+	}
+	</style>
+  </head>
+  <body>
+    <div id="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

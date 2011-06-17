@@ -1,0 +1,44 @@
+<div class="left outer">
+	
+	<div id="comment-<%= comment.id.to_s %>" class="comment rounded-border left">
+		<% if is_owner_or_admin(comment) %>
+			<div class="comment-admin">
+				<%= link_to "Edit", edit_comment_path(comment), :remote => true %>
+				<%= link_to "X", comment, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+			</div>
+		<% end %>
+  		<div class="body">
+    		<%= simple_format(some_html(comment.body)) %>
+  		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="comment-name left">
+		<em><%= comment.user.display_name %> said on <%= comment.created_at.strftime("%a %d %b %Y")  %> </em> |
+	</div>	
+	<div id='comment-comment-link-<%= comment.id.to_s %>' class="comment-link left">
+		<% if user_signed_in? %>
+			<%= link_to 'Add a Reply', new_comment_comment_path(comment), :remote => true %>
+		<% else %>	
+			<%= link_to "Sign in to Reply", user_session_url(:next => url_for(@bet)) %>
+		<% end %>
+	</div>
+  	<div id='comment-comment-form-<%= comment.id.to_s %>' class="comment-comment-form left"></div>
+	
+<% unless comment.comments.empty? %>
+	<div class="clear"></div>
+	<div class="left"><%= link_to 'Show ' + pluralize(comment.comments.size.to_s, 'Reply'), "#", 'class' => "show-replies", 'data-text' => 'Show ' + pluralize(comment.comments.size.to_s, 'Reply') %></div>
+	<div class="clear"></div>
+<% end %>
+
+</div>
+
+<div class="clear"></div>
+  
+	<div id="comment-list-<%= comment.id.to_s %>" class="comment-list reply">
+  	<% unless comment.comments.empty? %>
+	  	<div class="replies">
+      		<%= render :partial => 'comments/comment', :collection => comment.comments %>
+    	</div>
+  	<% end %>
+
+</div>

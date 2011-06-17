@@ -1,0 +1,5 @@
+<% if @comment %>
+	$("#comment-<%= @comment.id.to_s %>").parent().replaceWith("<%= escape_javascript(render 'comment', :comment => @comment)%>");
+<% else %>
+	$("#comment-comment-form-<%= @parent_comment.id.to_s %>").html("")
+<% end %>

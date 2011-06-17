@@ -1,0 +1,13 @@
+<div class="infobox-container infobox-admin opaque"> 
+	<div class="triangle-l"></div> 
+	<div class="triangle-r"></div> 
+
+	<div class="infobox"> 
+		<h3><span>Admin Links</span></h3> 
+		<ul>
+			<li><%= link_to "All Purchases", purchases_url(:subdomain => false) %></li>
+			<li><%= link_to "All Cashouts", cashouts_url(:subdomain => false) %></li>
+			<li><%= link_to "Create a new Category", new_bet_category_path(:subdomain => false) %></li>
+		</ul>	
+	</div> 
+</div>

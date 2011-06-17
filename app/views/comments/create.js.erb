@@ -1,0 +1,8 @@
+<% if @parent.is_a?(Bet) %>
+	$("#bet-comment-list #pagination").prepend("<%= escape_javascript(render 'comment', :comment => @comment)%>");
+	$(':input','#new_comment').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+<% else %>
+	$("#comment-list-<%= @parent.id.to_s %>").prepend("<ul class='comment-list'><%= escape_javascript(render 'comment', :comment => @comment )%></ul>");
+	$("#comment-comment-form-<%= @parent.id.to_s %>").html("");
+<% end %>
+$("#comment-<%= @comment.id.to_s %>").effect("highlight", 3000);

@@ -1,0 +1,8 @@
+if ($("#traditional").length>0)
+{
+	$("#traditional").html("<%= escape_javascript(render 'form') %>");
+}
+
+$('.flash').remove();
+$("#container").prepend('<%= escape_javascript(create_flash_messages(flash)) %>');
+flashNotice();

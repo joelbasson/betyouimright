@@ -1,0 +1,12 @@
+<div id="purchase-<%= purchase.id %>" class="purchase <%= purchase.status %>">
+	<div class="row-item row-item-short"><%= purchase.id %></div>
+	<div class="row-item border-left row-item-long"><%= purchase.user.display_name %></div>
+	<div class="row-item border-left row-item-long" title="<%= purchase.user.email %>"><%= purchase.user.email %></div>
+	<div class="row-item border-left row-item-short"><%= purchase.amount %></div>
+	<div class="row-item border-left row-item-short"><%= number_to_currency(purchase.value, :unit => def_cur) %></div>
+	<div class="row-item border-left row-item-long"><%= purchase.created_at.strftime("%d/%m/%Y %I:%M %p")  %></div>
+	<div class="row-item border-left row-item-long"><%= purchase.purchased_at ? purchase.purchased_at.strftime("%d/%m/%Y %I:%M %p") : "Waiting"  %></div>
+	<div class="row-item border-left row-item-long bold"><%= purchase.payment_notification ? purchase.payment_notification.status : "Waiting" %></div>
+	<div class="left"><%= link_to "info", purchase_payment_info_path(purchase), :remote => true %></div>
+	<div class="clear"></div>
+</div>

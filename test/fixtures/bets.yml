@@ -1,0 +1,19 @@
+one:
+  title: MyString
+  description: MyText
+  end_date: 2011-03-08 22:50:09
+  wager_amount: 1
+  verify_description: MyText
+  verified: false
+  confirmed: false
+  user_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  end_date: 2011-03-08 22:50:09
+  wager_amount: 1
+  verify_description: MyText
+  verified: false
+  confirmed: false
+  user_id: 1

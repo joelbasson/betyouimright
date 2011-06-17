@@ -1,0 +1,15 @@
+one:
+  name: MyString
+  short_description: MyString
+  description: MyText
+  rule: MyString
+  rule_description: MyText
+  activation: MyString
+
+two:
+  name: MyString
+  short_description: MyString
+  description: MyText
+  rule: MyString
+  rule_description: MyText
+  activation: MyString

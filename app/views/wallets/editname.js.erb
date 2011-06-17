@@ -1,0 +1,5 @@
+if ($("#wallet-displayname").length>0)
+{
+	$("#wallet-displayname").html("<%= escape_javascript(render 'nameform') %>");
+	$("#wallet-displayname").append("<%= escape_javascript(link_to 'Cancel', wallet_cancelname_path(current_user.wallet), :remote => true) %>")
+}

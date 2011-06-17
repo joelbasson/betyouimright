@@ -1,0 +1,5 @@
+<% if !params[:page].blank? %>
+		$("#pagination").replaceWith("<%= escape_javascript(render 'comments/comments') %>");
+<% else %>
+		$("#fancybox-content .center-inner").replaceWith("<%= escape_javascript(render :file => 'bets/show.fb.erb') %>");
+<% end %>	

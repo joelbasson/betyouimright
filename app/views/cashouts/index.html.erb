@@ -1,0 +1,18 @@
+<% title "Cashouts" %>
+
+<div class="left">
+	<h3>Search</h3>
+	<%= form_for @search do |f| %>
+	  <p>
+	    <%= f.search_field :id_eq, :placeholder => "Search Cashout ID's" %> and/or 
+	    <%= f.search_field :user_display_name_or_user_email_or_paypal_email_contains, :placeholder => "Search user name or email" %>
+		<%= f.submit "Search" %>
+	  </p>
+	<% end %>
+</div>
+
+<div class="clear"></div>
+
+<%= render 'cashouts' %>
+
+<div class="clear"></div>

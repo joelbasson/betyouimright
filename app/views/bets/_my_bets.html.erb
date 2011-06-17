@@ -1,0 +1,12 @@
+<div id="wallet-previews" class="wagers"> 
+	
+	<% if bets.size == 0 %>
+		&nbsp
+	<% end %>
+	
+<% for bet in bets do %>
+	<%= bet.title %> <span class="bold">(<%= bet.status %>)</span> created on  <%= bet.created_at.strftime("%a %d %b %Y %I:%M %p") %> - <%= link_to "Show", bet, :class => 'remote-link' %><br />
+<% end %>	
+
+<%= will_paginate bets, :params => {:controller => "bets", :action => "my_bets"} %>
+</div>

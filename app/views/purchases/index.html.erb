@@ -1,0 +1,21 @@
+<% title "Purchases" %>
+
+<div class="left">
+	<h3>Search</h3>
+	<%= form_for @search do |f| %>
+	  <p>
+	    <%= f.search_field :id_eq, :placeholder => "Search Transaction ID's" %> and/or 
+	    <%= f.search_field :user_display_name_or_user_email_contains, :placeholder => "Search user name or email" %>
+		<%= f.submit "Search" %>
+	  </p>
+	<% end %>
+</div>
+
+<div class="clear"></div>
+
+<%= render 'purchases' %>
+
+
+<div id="info-box" class="info-box rounded-border"><h3>Information</h3></div>
+
+<div class="clear"></div>

@@ -1,0 +1,4 @@
+if ($("#wallet-previews").length>0)
+{
+	$("#wallet-previews").replaceWith("<%= escape_javascript(render 'my_bets', :bets => @bets ) %>");
+}

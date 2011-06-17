@@ -1,0 +1,1 @@
+$("#comment-<%= @comment.id.to_s %>").html("<%= escape_javascript(render 'form', :comment => @comment) %>");

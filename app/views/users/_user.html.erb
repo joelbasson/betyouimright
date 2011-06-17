@@ -1,0 +1,10 @@
+<tr class='user' id="user-<%= user.id %>">
+	<td><%= user.display_name %></td>
+	<td><%= user.email %></td>
+	<td><%= user.created_at.strftime("%m/%d/%Y") %></td>
+	<td><%= time_ago_in_words user.last_sign_in_at %> ago</td>
+	<td><%= user.sign_in_count %></td>
+	<td><%= user.admin %></td>
+	<td><%= link_to "Toggle Admin", toggleadmin_path(user), :remote => true %></td>
+</tr>
+

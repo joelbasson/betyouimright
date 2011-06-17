@@ -1,0 +1,13 @@
+<div>
+	<h3>My Ranking</h3>
+	<% if user_signed_in? %>
+		<% cache("mystats-" + current_user.id.to_s, :expires_in => 1.day) do %>
+			You are currently ranked <%= current_user.rank.ordinalize %> with <%= current_user.wallet.score %> points
+		<% end %>
+		<p>
+			<%= link_to "My Account", current_user.wallet(:subdomain => false), :title => "View Account", :class => "fb-fancybox" %>
+		</p>
+	<% else %>
+	You need to <%= link_to "Sign in", 'auth/facebook' %> to see your ranking and score
+	<% end %>
+</div>

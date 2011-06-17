@@ -1,0 +1,9 @@
+if ($("#wallet-displayname").length>0)
+{
+	$("#wallet-displayname").html("Your display name : <span id='wallet-display-name' class='bold'><%= escape_javascript(@user.display_name) %></span>  <%= escape_javascript(link_to 'edit >>', wallet_editname_path(current_user.wallet), :remote => true) %>");
+}
+<% if !flash[:notice].blank? %>
+	$('.flash').remove();
+	$("#container").prepend('<div class="flash notice" style="display: none"><%= escape_javascript(flash.delete(:notice)) %></div>');
+	flashNotice();
+<% end %>

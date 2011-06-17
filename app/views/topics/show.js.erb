@@ -1,0 +1,4 @@
+if ($("#poststable").length>0)
+{
+	$("#poststable").replaceWith("<%= escape_javascript(render 'posts/posts') %>");
+}

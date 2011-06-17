@@ -1,0 +1,16 @@
+<% cache("fb-top-bet-categories", :expires_in => 1.day) do %>
+	<div class="left top-categories">
+		<div class="center top-categories-title">Categories</div>
+		<div class="clear"></div>	
+			<% for bet_category in BetCategory.order("id ASC").limit(4) %>
+				<div class="top-category-link left">
+					<%= link_to bet_category.name, bet_category, :remote => true %> 
+				</div>
+			<% end %>
+			<div class="top-category-link left">
+				<%= link_to "All >>", bet_categories_path, :class => "fb-fancybox" %>
+			</div>	
+		
+		<div class="clear"></div>	
+	</div>	
+<% end %>

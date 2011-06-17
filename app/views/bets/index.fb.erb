@@ -1,0 +1,47 @@
+<% title "Latest Bets", show_title = false %>
+
+<div class="intro-text">
+	Arguing with someone that thinks they're right when they're not? Tell them to put their money where their mouth is! Tell them "<%= APP_CONFIG["human_application_name"] %>!" Create your bet, put some credits on it, and dare them to bet against you. You can each bet as many times as you want, and other people can join in if they want. <br />
+	Win more Credits to bet with, build your Bragging Score and show the world who is always right! <%= link_to "How to play", "/how", :class => "fb-fancybox" %>
+</div>	
+
+<p class="center">
+	<% if user_signed_in? %>
+		<%= link_to "Create a New Bet now >>", new_bet_path, :class => "fb-button fb-fancybox" %>
+	<% else %>
+		<%= link_to "Create a New Bet now >>", '/auth/facebook', :class => "fb-button" %>
+	<% end %>
+</p>
+
+<div class="clear"></div>
+	
+<div class="search">	
+	<%= form_for @search, :remote => true do |f| %>
+	  <p>
+	    <%= f.label :title_or_description_or_user_display_name_contains, 'Search' %>
+	    <%= f.search_field :title_or_description_or_user_display_name_contains, :placeholder => "Search title, description or person" %>
+		<%= f.submit "Search", :disable_with => "Please wait..." %>
+	  </p>
+	<% end %>
+</div>
+
+<%= render 'shared/top_categories' %>
+
+<div class="clear"></div>
+
+<div id="search-title"></div>
+
+<%= render 'bets.html.erb' %>
+
+<div class="fb-like-general"><fb:like href='<%= APP_CONFIG['facebook_url'] %>' show_faces='false' width='350' font=''></fb:like></div>
+
+<% cache("daily-quote", :expires_in => 1.day) do %>
+	<p id="daily-quote"><em><%= get_daily_quote %></em></p>
+<% end %>
+<% if @fbshowbet %>
+	<script language="JavaScript">
+	$(document).ready(function(){
+		showBetPopup("<%= @fbshowbet %>");
+	});
+	</script>
+<% end %>

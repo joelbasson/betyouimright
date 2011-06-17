@@ -1,0 +1,21 @@
+<% cache("bet-#{@bet.id}-winnerslosers", :expires_in => 1.day) do %>
+	<div id="winners-panel" class="left thin-border standard-padding">
+		<div class="left winnerslosers">
+			<h3>Winners</h3>
+			<ul>
+				<% for wager in @bet.winning_wagers %>
+					<li><%= wager.user.display_name ? wager.user.display_name : "Unknown" %></li>
+				<% end %>
+			</ul>	
+		</div>
+
+		<div class="left winnerslosers">
+			<h3>Losers</h3>
+			<ul>
+				<% for wager in @bet.losing_wagers %>
+					<li><%= wager.user.display_name ? wager.user.display_name : "Unknown" %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+<% end %>	

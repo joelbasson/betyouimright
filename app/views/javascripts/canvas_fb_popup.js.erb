@@ -1,0 +1,2 @@
+showFBPopUp("Placed a bet on '<%= escape_javascript(@bet.title) %>'", "<%= escape_javascript(truncate(@bet.description, :length => 80)) %>", "<%= escape_javascript(@bet.title) %>", "<%= url_for(:action => 'show', :controller => 'bets', :id => @bet.to_param, :host => APP_CONFIG['facebook_host']) %>", "View bet");
+return false;

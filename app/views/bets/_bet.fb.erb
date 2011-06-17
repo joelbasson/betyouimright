@@ -1,0 +1,13 @@
+<div id="bet-<%= bet.id %>" class="bet-panel-small <%= bet.status.downcase %> <%= cycle("even", "odd") %>">
+	<% cache("fb-bet-small-" + bet.id.to_s, :expires_in => 1.day) do %>
+		<div class="bet-status-image"><%= image_tag("#{bet.validity_status.downcase}.png", :size => "40x40") %></div>
+		<div class="bet-title"><%= link_to bet.title, bet, :title => "Show details of " + bet.title + " bet", :class => "fb-fancybox" %></div>
+		<div class="bet-description"><%= truncate(bet.description, :length => 90) %></div>
+		<div class="bet-end-date"><%= ending(bet) %></div>
+		<div class="bet-wager-info">
+			<div class="bet-wager-amount">Current Value : <%= bet.total_value %> Credits</div>
+			<div class="bet-wager-amount"><%= pluralize(bet.wagers.wagers_for.size, "bet") %> for - <%= pluralize(bet.wagers.wagers_against.size, "bet") %> against</div>
+		</div>
+		<div class="bet-display-name-line red-text"><span class="bet-display-name"><%= link_to bet.user.display_name, publicprofile_path(bet.user) %></span> <%= taunt(bet) %></div>
+	<% end%>
+</div>	

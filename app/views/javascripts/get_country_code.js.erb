@@ -1,0 +1,20 @@
+function slideMessage(){
+          var message = "You appear to be from South Africa which has its own custom version - <a href='http://www.betyouimright.co.za/' style='font-family:Arial, Helvetica, sans-serif; color:blue !important;'>BetYouImRight South Africa</a><div style='position:absolute;top:0px;right:35px;padding-top:20px'><a  id='country-close' href='#' style='font-family:Arial, Helvetica, sans-serif; color:blue !important;'>close</a></div>";
+              div = $('<div id="country-warning"></div>').html(message).css({
+                       'min-height': '40px',
+                       'padding-top': '20px',
+                       'background-color':'#f9db17',
+                       'text-align':'center',
+                       'font-family':'Arial, Helvetica, sans-serif',
+                       'font-size':'12pt',
+                       'font-weight':'bold',
+                       'color':'black',
+					   'padding-right':'100px'
+                    }).hide().find('a').css({color:'#333'}).end();
+          div.prependTo(document.body).slideDown(500);
+ };
+
+<% if session[:country][:code] == "ZA" && session[:country][:shown] == false %>
+	slideMessage();
+	<% session[:country][:shown] = true %>
+<% end %>

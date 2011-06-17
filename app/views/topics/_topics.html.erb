@@ -1,0 +1,24 @@
+<% @topics.each do |topic| %>
+  <tr class="topicrow">
+    <td class="icon"><%= image_tag 'ruby.png' %></td>
+    <td class="description">
+      <%= link_to topic.title, topic_path(topic) %><br />
+      <span class="smaller">by <%= topic.user.username %></span>
+    </td>
+    <td class="counts smaller"><%= topic.posts.size - 1 %></td>
+    <td class="counts smaller"><%= topic.hits %></td>
+    <td class="last_post smaller">
+      <%= topic.posts.last.created_at %><br />
+      by <%= topic.posts.last.user.username %>
+    </td>
+  </tr>
+<% end %>
+<tr class="topicrow">
+	<td></td>
+	<td>
+		<%= will_paginate @topics %>
+	</td>	
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>

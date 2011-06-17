@@ -1,0 +1,18 @@
+<% cache("bet-#{@bet.id}-bonus-panel", :expires_in => 1.day) do %>
+	<div id="bonusbox" class="infobox-container"> 
+		<div class="triangle-l"></div> 
+		<div class="triangle-r"></div> 
+
+		<div class="infobox"> 
+			<h3><span>Bonuses</span></h3> 
+			<p>The following bonuses are available for this bet</p>  
+			<% Bonus.all.each do |bonus| %>
+				<div class="bonus">
+					<div class="bonus-name tooltip" data-tooltip="<%= bonus.description %>"><%= bonus.name %></div>
+					<div class="bonus-short-description"><%= bonus.short_description %></div>
+					<div class="bonus-status <%= short_status(bonus.get_status(@bet)) %>"><%= bonus.get_status(@bet) %></div>
+				</div>
+			<% end %>
+		</div> 
+	</div>
+<% end %>

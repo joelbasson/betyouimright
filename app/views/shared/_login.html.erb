@@ -1,0 +1,27 @@
+<div id="user_nav">
+	<% if user_signed_in? %>
+		<div id="credit-nav" class="left">
+      		<div><%= link_to "Credits " + current_user.wallet.credits.to_s, current_user.wallet(:subdomain => false), :title => "View Account" %></div>
+			<div>
+				<a href="<%= url_for current_user.wallet %>" title="<%= distance_of_time_in_words(Time.now, current_user.wallet.pointtime) %>">
+					<div class="points-outer">
+			  			<div class="left points-inner" style="width:<%= current_user.wallet.rel_time_to_more_credits %>px;"></div>
+					<div class="points-text very-small-text italics">Time till next free credits</div>
+			  		</div>
+				</a>
+			</div>
+		</div>
+		<div class="left separator"></div><!-- Signed in as <%= current_user.email %>. Not you? -->
+		<div id="login-nav" class="left">
+      		<%= link_to "Sign out", destroy_user_session_path, :title => "Signed in as " + current_user.display_name %>
+		</div>
+    <% else %>
+		<div id="login-nav" class="left">
+			<% if session[:facebook_canvas] %>
+				<%= link_to "Sign in", root_url(:subdomain => false) + "auth/facebook" %>
+			<% else %>
+				<%= link_to "Sign in", user_session_url(:subdomain => false) %>
+			<% end %>
+		</div>
+    <% end %>
+</div>

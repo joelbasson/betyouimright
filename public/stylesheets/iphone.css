@@ -1,0 +1,111 @@
+#inner-page, .footer 
+{
+  	width: 320px !important;
+}
+#head-menu
+{
+	width: 280px !important;
+	height:20px !important;
+}
+#user_nav
+{
+  	margin-top: 0 !important;
+}
+#user_nav a
+{
+	font-size:10px;
+}
+#logo-title
+{
+	padding:0;
+	font-size:20px !important;
+}
+.line
+{
+    width:300px !important;
+}
+.bet-panel-small
+{
+	clear:both;
+	width:100%;
+}
+.center-inner
+{
+	width:100%;
+	padding:0 !important;
+}
+#previews
+{
+	width:100%;
+	padding:0 !important;
+}
+.even, .odd
+{
+	margin:0;
+}
+.bet-panel-small
+{
+	height:270px !important;
+	width:270px !important;
+	padding:10px 5px 10px 5px !important;
+	margin-bottom:20px;
+}
+.bet-panel
+{
+	width:270px !important;
+	padding:10px 5px 10px 5px !important;
+}
+.bet-wager-info
+{
+	float:left !important;
+	font-size:70%;
+	margin-top:0 !important;
+}
+.bet-end-date
+{
+	margin-bottom:0 !important;
+}
+.admin-links
+{
+	float:left !important;
+}
+.bet-display-name-line
+{
+	margin-top:0;
+}
+a.trigger
+{
+	font-size:10px;
+	top:60px;
+	padding: 10px 15px 10px 40px;
+}
+
+a.trigger:hover
+{
+	font-size:10px;
+	top:60px;
+	padding: 10px 15px 10px 40px;
+}
+.sliding-panel 
+{
+	top: 40px;
+	width: 210px;
+	padding: 10px 10px 10px 10px;
+}
+
+.brag-panel 
+{
+	width: 200px;
+}
+.brag-panel-name 
+{
+	width: 100px;
+}
+.brag-panel-score
+{
+	width: 94px;
+}
+.flash
+{
+  padding: 15px 0 10px 0 !important;
+}

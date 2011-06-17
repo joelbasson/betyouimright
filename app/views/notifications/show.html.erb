@@ -1,0 +1,28 @@
+<% title "Notification" %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @notification.title %>
+</p>
+<p>
+  <strong>Message:</strong>
+  <%= @notification.message %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%= @notification.user_id %>
+</p>
+<p>
+  <strong>Viewed:</strong>
+  <%= @notification.viewed %>
+</p>
+<p>
+  <strong>Closed:</strong>
+  <%= @notification.closed %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_notification_path(@notification) %> |
+  <%= link_to "Destroy", @notification, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", notifications_path %>
+</p>

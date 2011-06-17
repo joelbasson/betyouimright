@@ -1,0 +1,10 @@
+if ($('#errors_for_<%= escape_javascript(@model.class.name.underscore) %>').length > 0)
+{
+	$('#errors_for_<%= escape_javascript(@model.class.name.underscore) %>').html('<%= escape_javascript(raw(@model.errors.collect{|k,v| "<li>The #{k} field #{v}</li>"}.to_s )) %> </ul>')
+	$('#errors_for_<%= escape_javascript(@model.class.name.underscore) %>').addClass('error_messages')
+	$('#errors_for_<%= escape_javascript(@model.class.name.underscore) %>').effect("highlight", {}, 3000);
+}
+$('.inline-errors').remove();
+<% @model.errors.each do |attr,msg| %>
+	$('li#<%= escape_javascript(@model.class.name.underscore) %>_<%= attr.to_s %>_input').append("<p class='inline-errors'><%= msg %></p>");
+<% end %>	

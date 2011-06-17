@@ -1,0 +1,24 @@
+<% title "Cash-Out Credits" %>
+
+<p>
+<%= link_to "<< Back ", current_user.wallet, :title => "View Account" %>
+</p>
+
+<p>Cashouts have a delay period of 30 days to prevent credit card fraud and money laundering. After clicking <em>'cashout'</em> a hold will be put on that amount of credits and your paypal account will will be credited with the funds after 30 days.</p>
+<p>For <b>cashout</b> Credits are valued at 100 credits for <%= number_to_currency(100  * get_sell_credit_value, :unit => def_cur) %>, or roughly <%= number_to_currency(100  * get_sell_credit_value * 6.8, :unit => "R") %> depending on the exchange rate on the given day. Minimum cashout is 200 credits. Credits must be cashed out in multiples of 100</p>
+
+
+<%= form_for @cashout do |f| %>
+	<%= error_messages_for(@cashout) %>
+	
+	<p><%= f.label :amount, "Amount" %>
+	   <%= f.number_field :amount, :min => 200, :step => 100 %>
+	</p>
+	<p><%= f.label :paypal_email, "PayPal email address" %>
+	   <%= f.email_field :paypal_email %>
+	</p>
+	<p>
+	   <%= f.submit 'Cashout' %>
+	</p>
+	
+<% end %>

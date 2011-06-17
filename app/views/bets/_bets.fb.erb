@@ -1,0 +1,19 @@
+<div id="previews">
+	
+	<p class="sort-links">
+	  Sort by:
+	  <%= sort_link @search, :end_date, 'Ending' %> |
+	  <%= sort_link @search, :created_at, 'Newest' %> | 
+	  <%= sort_link @search, :wagers_count, 'Popularity' %>
+	</p>
+	
+	<% if @bets.size == 0 %>
+		&nbsp
+	<% end %>
+	<% for bet in @bets %>
+		<%= render :file => "bets/_bet.fb.erb", :locals => { :bet => bet } %>
+	<% end %>
+	<div class="clear"></div>
+	<%= will_paginate @bets, :params => {:format => nil} %>
+	
+</div>

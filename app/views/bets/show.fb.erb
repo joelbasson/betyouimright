@@ -1,0 +1,118 @@
+<div class="center-inner">	
+	<%= hidden_field_tag "current-page", url_for(@bet) %>
+	
+	<% cache("fb-bet-" + @bet.id.to_s, :expires_in => 1.day) do %>
+		<div id="bet-<%= @bet.id %>" class="bet-panel">
+			<div class="bet-status-image"><%= image_tag("#{@bet.validity_status.downcase}.png", :size => "90x90") %></div>
+			<div class="bet-title"><%= @bet.title %></div>
+			<div class="bet-description"><%= simple_format(some_html(@bet.description)) %></div>
+			<div class="bet-generic-line"><em><%= ending(@bet) %></em></div>
+			<div class="bet-generic-line">Category : <%= link_to_if @bet.bet_category, @bet.bet_category ? @bet.bet_category.name : "", @bet.bet_category, :class => 'no-decoration', :remote => true %></em></div>
+			<div class="bet-wager-details left">
+				<%= render 'bet_wager_details.html.erb' %>
+			</div>
+			<div class="bet-generic-line left simple-clear"><%= fb_most_confident(@bet) %></div>
+			<div class="bet-verify-description left simple-clear">How to verify bet : <%= @bet.verify_description %></div>	
+			<div class="bet-display-name left simple-clear"><%= link_to @bet.user.display_name, publicprofile_path(@bet.user), :remote => true %> <%= taunt(@bet) %></div>
+			<div class="right simple-clear facebook-buttons">
+				<div id="d_clip_container" style="position:relative" class="left">
+				   <div id="d_clip_button">Copy to Clipboard</div>
+				</div>
+				<div class="fb-like left"><fb:like href='<%= url_for(:action => 'show', :controller => 'bets', :id => @bet.to_param, :host => APP_CONFIG['facebook_host']) %>' show_faces='false' width='250' font=''></fb:like></div>
+				<div class="fb-feed left">or 
+				<%= link_to image_tag("facebook-button.jpg", :size => "20x20", :alt => "Post to Facebook Wall") + " post to your wall", "/javascripts/canvas_fb_popup.js?bet_id=#{@bet.id.to_i}", :id => "canvas-facebook-button-link", :class => "facebook-button-link", :title => "Post to Facebook Wall", :remote => true %></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	<% end %>
+	
+	<% if @newbet %>
+		<div id="newbet-infobox" class="infobox-container-outer">
+			<div class="infobox-container"> 
+				<div class="triangle-l"></div> 
+				<div class="triangle-r"></div> 
+
+				<div class="infobox"> 
+					<h3><span>Well done on creating a new bet!</span></h3> 
+					<p>To increase the amount of credits and points you can earn you need to find people that will bet against (or with) you.</p>
+					<p>There are some options below that might make your life easier</p>  
+				</div> 
+			</div>
+		</div>
+	<% end %>
+	
+	<div class="clear"></div>
+	
+	<% if @bet.validity_status == "Undecided" && @bet.confirmed == true %>
+	
+		<div class="wager-links standard-padding">
+			<% if user_signed_in? %>
+				<% if !@bet.wager_by_user(current_user) %>
+					<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %> or <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " credit that he's right", bet_now_path(@bet, :against => 'false'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+				<% elsif @bet.wager_by_user(current_user).against == true %>
+					<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+				<% elsif @bet.wager_by_user(current_user).against == false %>	
+					<% if @bet.user == current_user %>
+						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that you're right", bet_now_path(@bet, :against => 'false'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+					<% else %>
+						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's right", bet_now_path(@bet, :against => 'false'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+					<% end %>
+				<% end %>
+			<% else %>
+				<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", '/auth/facebook', :class => "red-text" %> or <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's right", '/auth/facebook', :class => "red-text" %>
+			<% end %>
+		</div>
+		
+	<% end %>
+	
+	<div class="infobox-container-outer">
+		<div class="infobox-container"> 
+			<div class="triangle-l"></div> 
+			<div class="triangle-r"></div> 
+
+			<div class="infobox"> 
+				<h3><span>Did you know?</span></h3> 
+				<p>You can bet as many times on the same bet as you like, just to prove your confidence. Provided you have enough credits of course!</p>  
+			</div> 
+		</div>
+		<%= render 'bonus_panel.html.erb' %>
+	</div>
+	
+	<div class="spacer"></div>
+	
+	<% if @bet.status == "Undecided" && @bet.confirmed == true %>
+		<h3><%= link_to "Show Wagers Placed >>", bet_path(@bet), :id => "bet-wagers-link" %></h3>
+		<div id="bet-wagers-list" class="thin-border standard-padding">
+			<%= render 'wagers/wagers.html.erb' %>
+		</div>
+	<% end %>
+		
+	<% if @bet.status != "Undecided" %>	
+	
+		<h3><%= link_to "Show Winners and Losers >>", "#", :id => "winners-losers-link" %></h3>
+		
+		<%= render 'winnnerslosers.html.erb'%>
+		
+		<div class="clear"></div>
+		
+	<% end %>
+		
+	<h3>Comments</h3>
+	
+	<fb:comments href="<%= url_for(:only_path => false, :controller => 'bets', :action => 'show', :id => @bet.to_param) %>" num_posts="<%= Comment.per_page.to_s %>"></fb:comments>
+	
+</div>
+
+<script language="JavaScript">
+	$(document).ready(function(){		
+		FB.XFBML.parse();
+	});		
+</script>
+<% if @bet.created_at > 1.minute.ago && user_signed_in? && @bet.user = current_user %>
+	<script language="JavaScript">
+	$(document).ready(function(){
+		setTimeout("$('#canvas-facebook-button-link').click()",6000);
+		activateClipboard("<%= @bet.to_param %>");
+	});
+	</script>
+<% end %>

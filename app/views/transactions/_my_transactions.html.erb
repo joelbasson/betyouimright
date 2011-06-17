@@ -1,0 +1,12 @@
+<div id="wallet-previews"> 
+	
+	<% if transactions.size == 0 %>
+		&nbsp
+	<% end %>
+	
+<% for transaction in transactions do %>
+	<%= link_description_bet(transaction) %> on <%= transaction.created_at.strftime("%a %d %b %Y %I:%M %p") %><br />
+<% end %>	
+
+<%= will_paginate transactions, :params => {:controller => "transactions", :action => "my_transactions", :format => nil}, :param_name => "my_transactions_page" %>
+</div>

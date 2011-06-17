@@ -1,0 +1,12 @@
+$('.user').remove();
+$("table").append("<%= escape_javascript(render @users) %>");
+$(".sort-links").html("<%= escape_javascript(render 'display_links') %>");
+
+if ($('.pagination').length > 0)
+{
+	$('.pagination').replaceWith("<%= escape_javascript(will_paginate @users) %>")
+}
+else
+{
+	$('#center-inner').append("<%= escape_javascript(will_paginate @users) %>")
+}

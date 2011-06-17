@@ -1,0 +1,20 @@
+<% if is_facebook? %>
+	$.fancybox.close()
+<% end %>
+if ($("#previews").length>0)
+{
+	<% if is_facebook? %>
+		$("#previews").replaceWith("<%= escape_javascript(render :file => 'bets/_bets.fb.erb') %>");
+		<% if !@searchtitle.blank? %>
+			$("#search-title").html("Bets for Category '<%= escape_javascript( @searchtitle ) %>'");
+			$("#search-title").show();
+		<% else %>
+			$("#search-title").html("");
+			$("#search-title").hide();
+		<% end %>
+	<% else %>	
+		$("#previews").replaceWith("<%= escape_javascript(render 'bets/bets') %>");
+		$("h2").text("Bets for Category '<%= escape_javascript( @searchtitle ) %>'");
+	<% end %>
+	
+}

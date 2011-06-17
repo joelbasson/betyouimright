@@ -1,0 +1,1 @@
+$("#comment-<%= @comment.id.to_s %>").parent().replaceWith("<%= escape_javascript(render 'comment', :comment => @comment)%>");

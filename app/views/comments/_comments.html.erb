@@ -1,0 +1,11 @@
+<div id="pagination">
+	<% cache("bet-#{@bet.id.to_s}-comments-page-" + @comments.current_page.to_s, :expires_in => 1.day) do %>
+	
+		<%= render @comments %>
+
+		<div class="clear"></div>
+
+		<%= will_paginate @comments %>
+		
+	<% end %>
+</div>

@@ -1,0 +1,42 @@
+<table id="poststable">
+  <% @posts.each do |post| %>
+  <tr>
+    <td class="post_author" rowspan="2">
+      <span class="name"><%= post.user.username %></span>
+      <span class="avatar">
+      	<% for award in post.user.wallet.awards %>
+			<span class='<%= award.name.downcase %>'><%= image_tag("#{award.name.downcase}.png", :size => "27x27", :alt => award.name, :title => award.name, :class => 'preview') %></span>
+		<% end %>
+      </span>
+      <span class="info smaller">
+        Posts <%= post.user.posts.size %><br />
+		Bragging Score <%= post.user.wallet.score %><br />
+        Registered <%= post.user.created_at.to_s(:joined) %><br />
+		<%= link_to "Public Profile", publicprofile_path(post.user, :only_path => false, :subdomain => false) %><br />
+      </span>
+    </td>
+    <td class="post_header">
+      <span class="left post_date smaller">Posted <%= post.created_at %></span>
+      <span class="right controls">
+          <%= link_to "Reply", new_topic_post_path(@topic) %>
+          <%= link_to "Quote", new_topic_post_path(@topic, :quote => post) %>
+		  <% if current_user.try(:admin?) || is_owner(@topic) %>
+          	<%= link_to "Edit", edit_post_path(post) %>
+          	<%= link_to "Delete", post, :confirm => "Are you sure?", :method => :delete %>
+		  <% end %>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td class="post_body">
+      <%= simple_format(some_html(post.body, true)) %>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+	<td class="post_author" rowspan="2" style="border-right:none;"></td>
+    <td style="post_header;border-left:none;">
+  		<%= will_paginate @posts %>	
+	</td>
+  </tr>
+</table>

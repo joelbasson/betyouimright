@@ -1,0 +1,81 @@
+development:
+  application_name: BetYouImRight
+  human_application_name: Bet you I'm right
+  domain_name: betyouimright.com
+  buy_credit_value: 5.0
+  sell_credit_value: 3.0
+  minimum_purchase: 2
+  default_currency: $
+  default_currency_code: USD
+  admin_email: joelbasson@me.com
+  paypal_address: 'betmas_1300139163_biz@betyoulose.com'
+  paypal_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
+  canvas_url: http://localhost:3000
+  facebook_url: http://localhost:3000/
+  facebook_host: localhost:3000
+  use_fb_comments: true
+  allow_cashouts: false
+  fb_app_id: 104465769636132
+  application1_name: BetYouImRight USA
+  application2_name: BetYouImRight South Africa
+  application2_url: http://www.betyouimright.co.za/
+  google_analytics_id: UA-71323-8
+  domain_periods: 1
+  show_country_redirect: true
+  betmaster_email: betmaster@betyouimright.com
+  notifier_email: notifier@betyouimright.com
+
+test:
+  application_name: BetYouImRight
+  human_application_name: Bet you I'm right
+  domain_name: betyouimright.com
+  buy_credit_value: 5.0
+  sell_credit_value: 3.0
+  minimum_purchase: 2
+  default_currency: $
+  default_currency_code: USD
+  admin_email: joelbasson@me.com
+  paypal_address: 'betmas_1300139163_biz@betyoulose.com'
+  paypal_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
+  canvas_url: http://localhost:3000
+  facebook_url: http://localhost:3000/
+  facebook_host: localhost:3000
+  use_fb_comments: true
+  allow_cashouts: false
+  fb_app_id: 104465769636132
+  application1_name: BetYouImRight USA
+  application2_name: BetYouImRight South Africa
+  application2_url: http://www.betyouimright.co.za/
+  google_analytics_id: UA-71323-8
+  domain_periods: 1
+  show_country_redirect: false
+  betmaster_email: betmaster@betyouimright.com
+  notifier_email: notifier@betyouimright.com
+
+production:
+  application_name: BetYouImRight
+  human_application_name: Bet you I'm right
+  domain_name: betyouimright.com
+  buy_credit_value: 5.0
+  sell_credit_value: 3.0
+  minimum_purchase: 2
+  default_currency: $
+  default_currency_code: USD
+  admin_email: joelbasson@me.com
+  paypal_address: 'joelbasson@me.com'
+  paypal_url: https://www.paypal.com/cgi-bin/webscr?
+  canvas_url: http://apps.facebook.com/betyouimright
+  facebook_url: http://apps.facebook.com/betyouimright/
+  facebook_host: apps.facebook.com/betyouimright
+  use_fb_comments: true
+  allow_cashouts: false
+  fb_app_id: 104465769636132
+  application1_name: BetYouImRight USA
+  application2_name: BetYouImRight South Africa
+  application2_url: http://www.betyouimright.co.za/
+  google_analytics_id: UA-71323-8
+  domain_periods: 1
+  show_country_redirect: true
+  betmaster_email: betmaster@betyouimright.com
+  notifier_email: notifier@betyouimright.com
+  

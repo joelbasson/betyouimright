@@ -1,0 +1,3 @@
+<div class="bet-wager-amount left simple-clear">Current Value: <%= @bet.total_value %> Credits <span class="small-text">(from <%= @bet.total_wagers %> wagers)</span></div>
+<div class="bet-wager-amount left simple-clear">Bonus Credits : <%= @bet.total_bonus_credits %> credits</div>
+<div class="bet-wager-amount left simple-clear"><%= @bet.wagers.wagers_for.size %> bets for - <%= @bet.wagers.wagers_against.size %> bets against</div>

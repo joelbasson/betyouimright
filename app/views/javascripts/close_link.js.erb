@@ -1,0 +1,10 @@
+$("#notification-<%= @notification.id%>").effect("explode", function(){
+	$("#notification-<%= @notification.id%>").remove();
+	if($("#notifications .notification").length < 1)
+	{
+		$("#notifications").slideUp(function(){
+			$("#notifications").remove();
+		});
+	}
+});
+

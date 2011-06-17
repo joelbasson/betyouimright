@@ -1,0 +1,27 @@
+<% title "Bonuses" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Short Description</th>
+    <th>Description</th>
+    <th>Rule</th>
+    <th>Rule Description</th>
+    <th>Activation</th>
+  </tr>
+  <% for bonus in @bonuses %>
+    <tr>
+      <td><%= bonus.name %></td>
+      <td><%= bonus.short_description %></td>
+      <td><%= bonus.description %></td>
+      <td><%= bonus.rule %></td>
+      <td><%= bonus.rule_description %></td>
+      <td><%= bonus.activation %></td>
+      <td><%= link_to "Show", bonus %></td>
+      <td><%= link_to "Edit", edit_bonus_path(bonus) %></td>
+      <td><%= link_to "Destroy", bonus, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Bonus", new_bonus_path %></p>

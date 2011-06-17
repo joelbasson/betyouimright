@@ -1,0 +1,10 @@
+<div id="cashout-<%= cashout.id %>" class="purchase <%= cashout.status %>">
+	<div class="row-item row-item-short"><%= cashout.id %></div>
+	<div class="row-item border-left row-item-long"><%= cashout.user.display_name %></div>
+	<div class="row-item border-left row-item-long"><%= cashout.user.email %></div>
+	<div class="row-item border-left row-item-long"><%= cashout.paypal_email %></div>
+	<div class="row-item border-left row-item-short"><%= cashout.amount %></div>
+	<div class="row-item border-left row-item-short"><%= number_to_currency(cashout.value, :unit => def_cur) %></div>
+	<div class="row-item border-left row-item-long" title="<%= time_ago_in_words(cashout.created_at) %> ago"><%= cashout.created_at.strftime("%d/%m/%Y %I:%M %p")  %></div>
+	<div class="row-item border-left row-item-short bold" title="<%= cashout.return_message ? cashout.return_message : cashout.status %>"><%= cashout.status %></div>
+</div>

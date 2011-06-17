@@ -1,0 +1,8 @@
+<% cache("bragging", :expires_in => 1.day) do %>
+	<div class="standard-padding brag-panel">
+		<div class="brag-panel-name heading">Name</div><div class="brag-panel-score heading">Score</div>
+		<% User.top10.each_with_index do |user, index| %>
+			<div class="brag-panel-name"><%= index + 1 %>. <%= user.display_name %></div><div class="brag-panel-score"><%= user.wallet.score %> points</div>
+		<% end %>
+	</div>	
+<% end %>

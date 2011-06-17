@@ -1,0 +1,25 @@
+<% title "Bet Categories" %>
+<% back_button link_to("<< Back", :back, :class => "back", :id => "back") %>
+
+<%= cache_if(!current_user.try(:admin?), "bet-categories", :expires_in => 1.day) do %>
+	<div class="bet-categories">
+		<ul>
+		  <% @grouped.keys.sort.each do |letter| %>
+		    <li>
+		      <h4><%= letter %></h4>
+		      <ul>
+		        <% @grouped[letter].each do |bet_category| %>
+		          	<li>
+						<%= link_to bet_category.name, bet_category %>
+						<% if current_user.try(:admin?) %>
+			      			| <%= link_to "Edit", edit_bet_category_path(bet_category) %>
+			      			| <%= link_to "Destroy", bet_category, :confirm => 'Are you sure?', :method => :delete %>
+				  		<% end %>
+					</li>
+		        <% end %>
+		      </ul>
+		    </li>
+		  <% end %>
+		</ul>
+	</div>
+<% end %>

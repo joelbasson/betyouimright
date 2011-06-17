@@ -1,0 +1,19 @@
+<% title "Purchase Credits" %>
+
+<% back_button link_to("<< Back", :back, :class => "back", :id => "back") %>
+
+<p>You can purchase credits to create new bets or bet on existing bets. After clicking <em>'buy'</em> you will be taken through to PayPal to complete your purchase. Ensure you click through to <em>'Return to <%= APP_CONFIG["application_name"] %>'</em> to ensure a quicker confirmation of your purchase.</p>
+<p>For <b>purchase</b> Credits are sold at 1 credit for <%= number_to_currency(1 * get_buy_credit_value, :unit => def_cur) %>, or roughly <%= number_to_currency(1  * get_buy_credit_value * 6.8, :unit => "R") %> depending on the exchange rate on the given day. Minimum purchase is 2 credits and Maximum is 100. Credits must be bought in multiples of 1</p>
+<p>Remember that all bets are purely for fun and Glory!</p>
+
+<% if APP_CONFIG["allow_cashouts"] == true %>
+
+	<p>For <b>cashout</b> Credits are valued at 1 credit for <%= number_to_currency(1  * get_sell_credit_value, :unit => def_cur) %>, or roughly <%= number_to_currency(1  * get_sell_credit_value * 6.8, :unit => "R") %> depending on the exchange rate on the given day. Minimum cashout is 20 credits. Credits must be cashed out in multiples of 20</p>
+<% end %>	
+
+<%= render 'form' %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.fancybox-1.3.4.pack.js' %>
+  <%= stylesheet_link_tag 'jquery.fancybox-1.3.2.css' %>
+<% end %>

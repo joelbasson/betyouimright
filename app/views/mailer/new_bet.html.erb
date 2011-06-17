@@ -1,0 +1,14 @@
+<div class="left">Hi <%= @bet.user.display_name %>, you created the following new bet at <%= APP_CONFIG["application_name"] %>. Click <%= link_to "here", url_for(:only_path => false, :controller => 'bets', :action => 'show', :id => @bet.to_param), :title => "Show details of " + @bet.title + " bet"  %> to view it</div>
+
+<div class="clear spacer"></div>
+
+<div class="bet-panel-small <%= @bet.status.downcase %>">
+	<div class="bet-title"><%= link_to @bet.title, url_for(:only_path => false, :controller => 'bets', :action => 'show', :id => @bet.to_param), :title => "Show details of " + @bet.title + " bet"  %></div>
+	<div class="bet-description"><%= truncate(@bet.description, :length => 150) %></div>
+	<div class="bet-end-date">Ends <%= @bet.end_date.strftime("%a %d %b %Y") %></div>
+	<div class="bet-wager-info">
+		<div class="bet-wager-amount">Total bets : <%= @bet.total_wagers %> worth <%= @bet.total_value %> credits</div>
+		<div class="bet-wager-amount"><%= @bet.wagers.wagers_for.size %> bets for - <%= @bet.wagers.wagers_against.size %> bets against</div>
+		<div class="bet-wager-amount">Default wager amount : <%= @bet.wager_amount %> credits</div>
+	</div>
+</div>

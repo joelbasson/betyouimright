@@ -1,0 +1,15 @@
+if ($("#previews").length>0)
+{
+	<% if is_facebook? %>
+		$("#previews").replaceWith("<%= escape_javascript(render :file => 'bets/_bets.fb.erb') %>");
+	<% else %>
+		$("#previews").replaceWith("<%= escape_javascript(render 'bets') %>");
+	<% end %>
+	
+	
+	<% if !@searchtitle.blank? %>
+		$("#search-title").html("Search for '<%= escape_javascript( @searchtitle ) %>'");
+	<% else %>
+		$("#search-title").html("");
+	<% end %>	
+}

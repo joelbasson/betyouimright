@@ -1,0 +1,26 @@
+<% title @bets.current_page < 2 ? "Bets for Category '#{@searchtitle}'" : "Bets for Category '#{@searchtitle}' - Page #{@bets.current_page}" %>
+
+<p class="center smaller-bottom-margin"><%= link_to "Create a New Bet now >>", new_bet_path, :class => "red-text very-big-text pulsedbox" %></p>
+
+<div class="clear"></div>
+	
+<div class="search">	
+	<%= form_for @search, :url => @bet_category, :html => { :method => :get }, :remote => true do |f| %>
+	  <p>
+	    <%= f.label :title_or_description_or_user_display_name_contains, 'Search' %>
+	    <%= f.search_field :title_or_description_or_user_display_name_contains, :placeholder => "Search title, description or person" %>
+		<%= f.submit "Search", :disable_with => "Please wait..." %>
+	  </p>
+	<% end %>
+</div>
+
+<%= render 'shared/top_categories' %>
+
+<div class="clear"></div>
+
+<%= render 'bets/bets' %>
+
+
+<% cache("daily-quote", :expires_in => 1.day) do %>
+	<p id="daily-quote"><em><%= get_daily_quote %></em></p>
+<% end %>

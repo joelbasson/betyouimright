@@ -1,0 +1,13 @@
+one:
+  title: MyString
+  message: MyText
+  user_id: 1
+  viewed: false
+  closed: false
+
+two:
+  title: MyString
+  message: MyText
+  user_id: 1
+  viewed: false
+  closed: false

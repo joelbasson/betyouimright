@@ -1,0 +1,24 @@
+<% if comment.id && @parent_comment.nil? %>
+	<p><%= link_to 'Cancel', comment_cancel_path(comment), :remote => true %></p>
+<% elsif @parent_comment %>
+	<p><%= link_to 'Cancel', comment_cancel_new_path(@parent_comment), :remote => true %></p>
+<% end %>
+<%= form_for [comment.commentable, comment], :remote => true do |f| %>
+	<%= error_messages_for(comment) %>
+	
+	<p>
+		<% if comment.commentable.is_a?(Bet) %>
+	   		<%= f.text_area :body %>
+		<% else %>
+			<%= f.text_area :body, :autofocus => "autofocus" %>
+		<% end %>
+	</p>
+	<p>
+		<% if user_signed_in? %>
+	   		<%= f.submit 'Submit' %>
+		<% else %>
+			<%= f.submit 'Submit', :disabled => "disabled" %>You need to <%= link_to "Sign in", user_session_url %> to continue
+		<% end %>
+	</p>
+	
+<% end %>

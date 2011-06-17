@@ -1,0 +1,9 @@
+<%= semantic_form_for @purchase do |f| %>
+	<%= f.inputs do %>
+	    <%= f.input :amount, :as => :number %>
+		<%= f.input :terms, :as => :boolean, :label => raw("Do you accept the #{link_to 'terms and conditions?', '/terms', :id => 'terms-link'}") %>	
+	<% end %>
+	<% f.buttons do %>
+	     <%= f.commit_button "Buy" %>
+	<% end %>
+<% end %>

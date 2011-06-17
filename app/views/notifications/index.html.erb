@@ -1,0 +1,25 @@
+<% title "Notifications" %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Message</th>
+    <th>User</th>
+    <th>Viewed</th>
+    <th>Closed</th>
+  </tr>
+  <% for notification in @notifications %>
+    <tr>
+      <td><%= notification.title %></td>
+      <td><%= notification.message %></td>
+      <td><%= notification.user_id %></td>
+      <td><%= notification.viewed %></td>
+      <td><%= notification.closed %></td>
+      <td><%= link_to "Show", notification %></td>
+      <td><%= link_to "Edit", edit_notification_path(notification) %></td>
+      <td><%= link_to "Destroy", notification, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Notification", new_notification_path %></p>

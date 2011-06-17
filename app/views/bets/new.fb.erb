@@ -1,0 +1,16 @@
+<div class="center-inner">
+	<%= hidden_field_tag "current-page", new_bet_path %>
+	
+	<% title "New Bet" %>
+
+	<h3>Ok, <%= current_user.display_name%>, create a new bet and show everyone who is right!</h3>
+	<p>If you are unsure as to how this works, please read our <%= link_to "How to play", "/how", :remote => true %> page</p>
+	<p>Remember that all bets are purely for fun and Glory!</p>
+		
+	<%= render 'form' %>
+
+</div>
+
+<script language="JavaScript">
+bindCalendar();
+</script>

@@ -1,0 +1,48 @@
+<% title "Bonus" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bonus.name %>
+</p>
+<p>
+  <strong>Short Description:</strong>
+  <%= @bonus.short_description %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @bonus.description %>
+</p>
+<p>
+  <strong>Rule:</strong>
+  <%= @bonus.rule %>
+</p>
+<p>
+  <strong>Rule Description:</strong>
+  <%= @bonus.rule_description %>
+</p>
+<p>
+  <strong>Type of Bonus:</strong>
+  <%= @bonus.bonustype %>
+</p>
+<p>
+  <strong>Activation:</strong>
+  <%= @bonus.activation %>
+</p>
+<p>
+  <strong>Credits:</strong>
+  <%= @bonus.credits %>
+</p>
+<p>
+  <strong>Target:</strong>
+  <%= @bonus.target %>
+</p>
+<p>
+  <strong>Beneficiary:</strong>
+  <%= @bonus.beneficiary %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_bonus_path(@bonus) %> |
+  <%= link_to "Destroy", @bonus, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", bonuses_path %>
+</p>

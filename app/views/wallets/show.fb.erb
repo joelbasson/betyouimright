@@ -1,0 +1,80 @@
+<div class="center-inner">
+	<%= hidden_field_tag "current-page", url_for(current_user.wallet) %>
+
+	<div id="wallet-displayname" class="left">
+		Your display name : <span id='wallet-display-name' class="bold"><%= current_user.display_name %></span> <%= link_to "edit >>", wallet_editname_path(current_user.wallet), :remote => true %>
+	</div>
+
+	<div class="clear spacer"></div>
+
+	<div class="credit-box left">
+		<div class="infobox-container"> 
+			<div class="triangle-l"></div> 
+			<div class="triangle-r"></div> 
+
+			<div class="infobox"> 
+				<h3><span>My Credits</span></h3> 
+				<p>
+				  <strong>Credits:</strong>
+				  <%= @wallet.credits %><br /> 
+				  <% if APP_CONFIG["allow_cashouts"] == true %>
+				  	<span class="small-text italics">cashout value <%= number_to_currency(@wallet.credits  * get_sell_credit_value, :unit => "$") %></span><br />
+				  <% end %>
+				  <strong>Time till next free credits:</strong><br /> 
+				  <%= distance_of_time_in_words(Time.now, @wallet.pointtime) %> 
+				  <div class="points-outer" title="<%= @wallet.rel_time_to_more_credits %>% complete">
+				  	<div class="left points-inner" style="width:<%= @wallet.rel_time_to_more_credits %>px;"></div>
+				  </div>
+				</p>
+				<p><%= link_to "Buy Credits >>", new_purchase_path, :class => "red-text", :remote => true %></p>
+
+				<% if APP_CONFIG["allow_cashouts"] == true %>
+					<p><%= link_to "Cashout Credits >>", new_cashout_path, :class => "red-text", :remote => true %></p>
+				<% end %>
+			</div> 
+		</div>
+	</div>
+
+	<div class="clear"></div>
+
+	<div class="spacer"></div>
+
+	<%= link_to "How to play >>", "/how", :remote => true %>
+
+	<h3 class="center">Points and Awards</h3>
+
+	<div class="standard-padding brag-page">
+		<div class="brag-page-name heading">Name</div><div class="brag-page-score heading">Score</div><div class="brag-page-awards heading">Awards</div>
+			<div class="brag-page-name"><%= current_user.display_name %></div><div class="brag-page-score"><%= current_user.wallet.score %> points</div>
+			<div class="brag-page-awards">
+				<% for award in current_user.wallet.awards %>
+					<span class='<%= award.name.downcase %>'><%= image_tag("#{award.name.downcase}.png", :size => "27x27", :alt => award.name, :title => award.name, :class => 'preview') %></span>
+				<% end %>
+			</div>
+	</div>
+
+	<div class="clear spacer"></div>
+
+	<h3 class="center">Facebook Friends using <%= APP_CONFIG["application_name"]  %></h3>
+	<div id='friends'></div>
+	<div class="center"><%= link_to "Invite Facebook Friends", "#", :id => "invite-facebook" %></div>
+	
+	<div class="clear spacer"></div>
+
+	<h3 class="center">History</h3>
+
+	<div class="my-links bold">
+	  	<%= link_to "Transactions", my_transactions_path(:my_transactions_page => 1), :remote => true %>  | 
+		<%= link_to "My Bets", my_bets_path, :remote => true %> | 
+		<%= link_to "My Betting History", my_wagers_path(:my_wagers_page => 1), :remote => true %>
+	</div>
+
+	<%= render 'transactions/my_transactions.html.erb', :transactions => @wallet.transactions.paginate(:per_page => 10, :page => 1) %>
+
+</div>
+
+<% javascript "facebook_friends" %>
+
+<% content_for :fb_javasctipts do %>
+	getFBFriends();
+<% end %>

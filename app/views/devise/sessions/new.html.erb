@@ -1,0 +1,21 @@
+<% title "Sign In" %>  
+
+<div class="center-inner">
+	
+	<div id="oauth">
+			<%= render 'devise/shared/authentication', :authentications => current_user ? current_user.authentications : nil   %>
+	</div>
+
+	<div class="clear"></div> 
+
+	<div class="traditional-link"><%= link_to "Or use Traditional Login", "#", :id => "traditional-link" %></div>
+
+	<div class="clear"></div> 
+
+	<div id="traditional">
+		<%= render 'form' %>
+	</div>
+
+</div>
+
+<div class="clear"></div> 

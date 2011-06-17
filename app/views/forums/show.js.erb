@@ -1,0 +1,5 @@
+if ($(".topicrow").length>0)
+{
+	$(".topicrow").remove();
+	$("table").append("<%= escape_javascript(render 'topics/topics') %>");
+}

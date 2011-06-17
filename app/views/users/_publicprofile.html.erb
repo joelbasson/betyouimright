@@ -1,0 +1,30 @@
+<div class="center-inner">
+	
+<% title "#{@user.display_name}'s public profile" %>
+
+<h3>Points and Awards</h3>
+
+<div class="standard-padding brag-page">
+	<div class="brag-page-name heading">Name</div><div class="brag-page-score heading">Score</div><div class="brag-page-awards heading">Awards</div>
+		<div class="brag-page-name"><%= @user.display_name %></div><div class="brag-page-score"><%= @user.wallet.score %> points</div>
+		<div class="brag-page-awards">
+			<% for award in @user.wallet.awards %>
+				<span class='<%= award.name.downcase %>'><%= image_tag("#{award.name.downcase}.png", :size => "27x27", :alt => award.name, :title => award.name, :class => 'preview') %></span>
+			<% end %>
+		</div>
+</div>
+<div class="clear"></div>
+
+<h3>Forum Activity</h3>
+Amount of topics : <%= @user.topics.size %><br />
+Amount of posts : <%= @user.posts.size %><br />
+
+<h3>History</h3>
+
+<div class="my-links bold">
+	<%= link_to "Bets created", my_bets_path(:user_id => @user.id), :remote => true %> | 
+	<%= link_to "Betting History", my_wagers_path(:my_wagers_page => 1, :user_id => @user.id), :remote => true %>
+</div>
+
+<%= render 'bets/my_bets', :bets => @user.bets.order("id DESC").paginate(:per_page => Bet.per_page, :page => params[:page])  %>
+</div>

@@ -1,0 +1,31 @@
+<% title "Users" %>
+
+<div id="center-inner">
+
+	<%= form_for @search, :remote => true do |f| %>
+		<p>
+		<%= f.label :display_name_or_email_contains, 'Search' %>
+		<%= f.search_field :display_name_or_email_contains, :placeholder => "Search DisplayName or email" %>
+		<%= f.submit "Search", :disable_with => "Please wait..." %>
+		</p>
+	<% end %>
+	
+	<h3>Results</h3>
+	<p class="sort-links">
+	  <%= render :partial => 'display_links' %>
+	</p>
+	<table class="users-table">
+	  <tr>
+	    <th>DisplayName</th>
+	    <th>Email</th>
+		<th>DateJoined</th>
+	    <th>LastSignIn</th>
+	 	<th>SignInCount</th>
+	    <th>Admin?</th>
+	  </tr>
+	  <%= render @users %>
+	</table>
+
+	<%= will_paginate @users %>
+
+</div>

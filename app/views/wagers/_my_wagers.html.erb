@@ -1,0 +1,12 @@
+<div id="wallet-previews" class="wagers"> 
+	
+	<% if @wagers.size == 0 %>
+		&nbsp
+	<% end %>
+	
+<% for wager in @wagers do %>
+	<span class="bold"><%= wager.user.display_name %></span> <%= wager.in_words %> and put <span class="bold"><%= wager.credits %></span> credit the line on  <%= wager.created_at.strftime("%a %d %b %Y %I:%M %p") %> - <%= link_to "Show", wager.bet, :class => 'remote-link' %><br />
+<% end %>	
+
+<%= will_paginate @wagers, :params => {:controller => "wagers", :action => "my_wagers"}, :param_name => "my_wagers_page" %>
+</div>

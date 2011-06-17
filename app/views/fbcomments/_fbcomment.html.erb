@@ -1,0 +1,5 @@
+<div id="<%= fbcomment.id %>" class="fbcomment">
+	<span><em><%= fbcomment.user.name %> said on <%= fbcomment.created_time.strftime("%a %d %b %Y") %></em></span><br />
+	<span><%= fbcomment.message %></span>
+	<%= render fbcomment.comments %>
+</div>

@@ -1,0 +1,4 @@
+var current_page = $("#current-page").val();
+var content = "<a href='" + current_page + "' class='back' id='back' data-remote='true'><< Back</a>"
+content += "<%= escape_javascript(render :file => 'purchases/new.fb.erb') %>"
+$("#fancybox-content .center-inner").html(content);

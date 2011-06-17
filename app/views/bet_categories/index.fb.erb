@@ -1,0 +1,20 @@
+<%= cache_if(!current_user.try(:admin?), "fb-bet-categories", :expires_in => 1.day) do %>
+<div class="center-inner">
+	<div class="bet-categories">
+		<ul>
+		  <% @grouped.keys.sort.each do |letter| %>
+		    <li>
+		      <h4><%= letter %></h4>
+		      <ul>
+		        <% @grouped[letter].each do |bet_category| %>
+		          	<li>
+						<%= link_to bet_category.name, bet_category, :remote => true %>
+					</li>
+		        <% end %>
+		      </ul>
+		    </li>
+		  <% end %>
+		</ul>
+	</div>
+</div>
+<% end %>
