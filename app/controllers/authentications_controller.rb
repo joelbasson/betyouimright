@@ -12,13 +12,25 @@ class AuthenticationsController < ApplicationController
     # render :text => request.env["omniauth.auth"].to_yaml  
     omniauth = request.env["omniauth.auth"]  
     if omniauth['provider'] == "facebook"
-      # session['fb_auth'] = request.env['omniauth.auth'] 
-      # session['fb_token'] = session['fb_auth']['credentials']['token'] 
+      session['fb_auth'] = request.env['omniauth.auth'] 
+      session['fb_token'] = session['fb_auth']['credentials']['token'] 
       # session['fb_error'] = nil
+      
+      # puts "-------FACEBOOK STUFF---------"
+      # puts fbuser.name
+      # pp fbuser
+      # puts "-------FRIENDS----------------"
+      # fbuser.friends.each do |friend|
+      #   puts friend.name + " - " + friend.identifier
+      # end
+      # puts "------------------------------"
     end
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])  
     if authentication  
       flash[:notice] = "Signed in successfully."  
+      user = authentication.user
+      user.apply_omniauth(omniauth)  
+      user.save
       sign_in(:user, authentication.user) 
       redirect_to request.env['omniauth.origin'] || root_url
     elsif current_user  
@@ -37,7 +49,13 @@ class AuthenticationsController < ApplicationController
       else
         user = User.new  
         user.apply_omniauth(omniauth)  
+        user.authentications.create(:provider => omniauth['provider'], :uid => omniauth['uid'])  
         if user.save   
+          wallet = user.build_wallet
+          wallet.pointtime = 1.week.from_now
+          wallet.credits = 2
+          wallet.save
+          user.save
           flash[:notice] = "Registered successfully via #{omniauth['provider']}."  
           sign_in(:user, user) 
           redirect_to request.env['omniauth.origin'] || root_url

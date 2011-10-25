@@ -1,0 +1,12 @@
+<div id="previews">
+	
+	<% if @bets.size == 0 %>
+		&nbsp
+	<% end %>
+	<%= render @private_bets %>
+	<div class="clear"></div>
+	<%= will_paginate @private_bets, :params => {:format => nil} %>
+	
+</div>
+
+

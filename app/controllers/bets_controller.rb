@@ -1,29 +1,95 @@
 class BetsController < ApplicationController
   respond_to :html, :xml, :json, :js, :fb
-  before_filter :authenticate_user!, :except => [:index, :show, :feed]
+  before_filter :authenticate_user!, :except => [:index, :public, :show, :feed]
   before_filter :authenticate_admin, :only => [:edit, :update, :destroy]
-  before_filter :find_bet, :except => [:index, :new, :create, :my_bets, :feed]
+  before_filter :find_bet, :except => [:index, :public, :private, :search, :new, :create, :my_bets, :feed]
   before_filter :check_time_to_credit, :only => [:index, :show]
   before_filter :check_facebook_canvas, :only => [:index, :show]
+  helper_method :sort_column, :sort_direction  
   cache_sweeper :bet_sweeper, :only => [:create, :update, :destroy]
   
-  def index
-    if !params[:search]
-      params["search"] = {"meta_sort" => "wagers_count.desc"}
-    end  
-    if params[:search] && params[:search]["confirmed_is_false"] == "1"
-      @search = Bet.search(params[:search])
-    else
-      @search = Bet.default.search(params[:search])
+  def index 
+    # if !params[:q]
+    #   params["q"] = {"meta_sort" => "wagers_count.desc"}
+    # end  
+    # if params[:q] && params[:q]["confirmed_false"] == "1"
+    #   @q = Bet.search(params[:q])
+    # else
+    #   @q = Bet.default.search(params[:q])
+    # end
+    # @searchtitle = params['q']['title_or_description_or_user_display_name_cont'].to_s
+    # if params[:bet]
+    #   @fbshowbet = params[:bet]
+    #   request.parameters.delete("bet")
+    # end
+    # if current_user
+    #   pq = Bet.private_bets(current_user).search(params[:q])
+    #   @private_bets = pq.result.paginate(:per_page => Bet.per_page, :page => params[:page])
+    # end
+    # @bets = @q.result.paginate(:per_page => Bet.per_page, :page => params[:page])
+    @bets = Bet.public_bets
+    
+    if params[:sort] && 
+       @bets = @bets.order(sort_column + ' ' + sort_direction)
     end
-    @searchtitle = params['search']['title_or_description_or_user_display_name_contains'].to_s
-    if params[:bet]
-      @fbshowbet = params[:bet]
-      request.parameters.delete("bet")
+    
+    if params[:search]
+      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+    end 
+    
+    @searchtitle = params[:search].to_s
+    
+    @bets = @bets.paginate(:per_page => Bet.per_page, :page => params[:page])
+  end
+  
+  def public
+    @bets = Bet.public_bets
+    
+    if params[:sort] && 
+       @bets = @bets.order(sort_column + ' ' + sort_direction)
     end
-    @bets = @search.paginate(:per_page => Bet.per_page, :page => params[:page])
+    
+    if params[:search]
+      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+    end 
+    
+    @searchtitle = params[:search].to_s
+    
+    @bets = @bets.paginate(:per_page => Bet.per_page, :page => params[:page])
+  end
+  
+  def private
+    @bets = Bet.private_bets(current_user)
+    
+    if params[:order]
+       @bets = @bets.order(sort_column + ' ' + sort_direction)
+    end
+    
+    if params[:search]
+      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+    end
+    
+    @searchtitle = params[:search].to_s
+    
+    @bets = @bets.paginate(:per_page => Bet.per_page, :page => params[:page])
   end
 
+  def search
+    @bets = Bet.default(current_user)
+    
+    if params[:order]
+       @bets = @bets.order(sort_column + ' ' + sort_direction)
+    end
+    
+    if params[:search]
+      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+    end
+    
+    @searchtitle = params[:search].to_s
+
+    @bets = @bets.paginate(:per_page => Bet.per_page, :page => params[:page])
+  end
+  
   def show
     if request.post? && is_facebook?
       redirect_to :action => 'index', :bet => @bet.to_param
@@ -38,7 +104,9 @@ class BetsController < ApplicationController
 
   def new
     @bet = Bet.new
+    pp current_user
     @bet.set_defaults(current_user)
+    pp @bet
     respond_with(@bet) do |format|
       format.fb { render :layout => false }
     end
@@ -107,5 +175,13 @@ class BetsController < ApplicationController
   def find_bet
     @bet = Bet.find(params[:id])
   end  
+  
+  def sort_column  
+    params[:sort] || "name"  
+  end  
+    
+  def sort_direction  
+    params[:direction] || "asc"  
+  end
   
 end

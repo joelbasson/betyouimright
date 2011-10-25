@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+bet_categories = BetCategory.create([{ :name => 'Other' }, { :name => 'Politics' }, { :name => 'Sports' }, { :name => 'Social' }, { :name => 'Technology' }])

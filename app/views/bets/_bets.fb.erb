@@ -2,18 +2,18 @@
 	
 	<p class="sort-links">
 	  Sort by:
-	  <%= sort_link @search, :end_date, 'Ending' %> |
-	  <%= sort_link @search, :created_at, 'Newest' %> | 
-	  <%= sort_link @search, :wagers_count, 'Popularity' %>
+	  <%= sortable "end_date", "Ending" %> |
+	  <%= sortable "created_at", "Newest" %> | 
+	  <%= sortable "wagers_count", "Popularity"  %>
 	</p>
 	
-	<% if @bets.size == 0 %>
+	<% if bets.size == 0 %>
 		&nbsp
 	<% end %>
 	<% for bet in @bets %>
-		<%= render :file => "bets/_bet.fb.erb", :locals => { :bet => bet } %>
+		<%= render :file => "bets/_bet.fb.erb", :locals => { :bet => bet, :bet_counter => 1 } %>
 	<% end %>
 	<div class="clear"></div>
-	<%= will_paginate @bets, :params => {:format => nil} %>
+	<%= will_paginate bets, :params => {:format => nil} %>
 	
 </div>

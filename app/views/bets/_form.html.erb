@@ -1,7 +1,8 @@
 <%= semantic_form_for @bet, :validate => true do |f| %>
-  <% f.inputs do %>
+  <%= f.inputs do %>
 	<%= f.input :title, :input_html => { :placeholder => "e.g The ANC will beat the DA in the 2011 Joburg local election" } %>
-	<%= f.input :description, :input_html => { :rows => 10, :cols => 10, :maxlength => 500, :placeholder => "e.g The ANC will beat the DA in the 2011 local elections for the Johannesburg council" } %>
+	<%= f.input :description, :input_html => { :rows => 10, :cols => 50, :maxlength => 500, :placeholder => "e.g The ANC will beat the DA in the 2011 local elections for the Johannesburg council" } %>
+	<%= f.input :visibility, :as => :select, :collection => [["Public", "Public"], ["Private", "Private"]], :include_blank => false %>
 	<%= f.input :bet_category, :collection => BetCategory.order("id ASC"), :include_blank => false  %>
 	<%= f.input :end_date, :as => :string %>
 	<% if current_user.try(:admin?) %>	
@@ -9,13 +10,13 @@
 	<% else %>
 		<%= f.input :wager_amount, :as => :hidden %>	
 	<% end %>
-	<%= f.input :verify_description, :label => "Verification", :hint => "Describe how we can verify the winner", :input_html => { :rows => 10, :cols => 10, :maxlength => 500, :placeholder => "e.g Check on http://www.elections.org.za/ the day after elections" } %>
+	<%= f.input :verify_description, :label => "Verification", :hint => "Describe how we can verify the winner", :input_html => { :rows => 10, :cols => 50, :maxlength => 500, :placeholder => "e.g Check on http://www.elections.org.za/ the day after elections" } %>
 	<% if current_user.try(:admin?) %>	
 		<%= f.input :confirmed %>
 		<%= f.input :status, :as => :select, :collection => [["Undecided", "Undecided"], ["Won", "Won"], ["Lost", "Lost"]], :include_blank => false %>
 	<% end %>
   <% end %>	
-  <% f.buttons do %>
+  <%= f.buttons do %>
       <%= f.commit_button %>
    <% end %>
 <% end %>

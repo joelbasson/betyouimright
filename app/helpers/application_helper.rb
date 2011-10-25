@@ -49,6 +49,8 @@ module ApplicationHelper
     doc, quotes = REXML::Document.new(xml), []
     item = doc.elements['rss/channel/item']
     return item.elements['description'].text + " - " + item.elements['title'].text 
+  rescue Exception
+    return "No internet connection"
   end
   
   def google_analytics(id = nil)
@@ -73,5 +75,12 @@ module ApplicationHelper
       capture(&block)
     end
   end
+  
+  def sortable(column, title = nil)  
+      title ||= column.titleize  
+      css_class = (column == sort_column) ? "current #{sort_direction}" : nil  
+      direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"  
+      link_to title, {:sort => column, :direction => direction}, {:class => css_class}  
+    end
   
 end

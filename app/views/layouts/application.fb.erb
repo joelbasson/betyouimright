@@ -4,10 +4,10 @@
     <title><%= content_for?(:title) ?  APP_CONFIG["application_name"] + " - " +  yield(:title) : APP_CONFIG["application_name"] %></title>
 	<meta name="description" content="The USA's favourite friendly betting site. Bet people that you are right about something and show them who is Mr Always Right" />
 	<meta name="keywords" content="Betting, Right, Wager, Prove, Brag" />
-    <%= stylesheet_link_tag "application", "facebook", "formtastic", "formtastic_changes", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/cupertino/jquery-ui.css", "jquery.fancybox-1.3.2.css" %>
-    <%= javascript_include_tag :defaults, 'facebook', 'location', 'jquery.fancybox-1.3.4.js', 'rails.validations', 'rails.validations.custom', 'ZeroClipboard' %>
+	<%= stylesheet_link_tag    "facebook" %>
+    <%= javascript_include_tag "application", "/javascripts/facebook.js" %>
 	<!--[if lte IE 9]>
-		<script src="/javascripts/jquery.ie6.js" type="text/javascript" charset="utf-8" ></script>
+		<script src="/assets/custom/jquery.ie6.js" type="text/javascript" charset="utf-8" ></script>
 	<![endif]-->
 	<meta property="fb:app_id" content="<%= APP_CONFIG["fb_app_id"] %>" />
 	<meta property="og:title" content="<%= APP_CONFIG["human_application_name"] %>" />

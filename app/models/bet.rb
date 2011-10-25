@@ -5,7 +5,7 @@ class Bet < ActiveRecord::Base
   has_many :comments, :as => :commentable, :order => "created_at DESC", :dependent => :destroy
   has_one :topic
   belongs_to :bet_category
-  attr_accessible :title, :description, :bet_category_id, :end_date, :wager_amount, :verify_description, :verified, :confirmed, :user_id, :wagers_count, :status
+  attr_accessible :title, :description, :visibility, :bet_category_id, :end_date, :wager_amount, :verify_description, :verified, :confirmed, :user_id, :wagers_count, :status
   validates_numericality_of :wager_amount, 
              :less_than_or_equal_to => 20, 
              :greater_than_or_equal_to => 1, 
@@ -16,11 +16,38 @@ class Bet < ActiveRecord::Base
   validates :end_date, :presence => true, :valid_date => true, :on => :create
   validate :wager_amount_is_valid_amount
   scope :standard, :order => "verified ASC, end_date DESC", :conditions => ["confirmed = ?", true] 
-  scope :default, :order => "verified ASC", :conditions => ["confirmed = ?", true]  
-  scope :end_date_reached, :order => "end_date DESC", :conditions => ["status = ? and end_date < ?", "Undecided", Time.now] 
+  scope :public_bets, :order => "verified ASC", :conditions => ["confirmed = ? AND visibility = ?", true, "Public"]  
+  scope :unconfirmed, :order => "created_at DESC", :conditions => ["confirmed = ? AND visibility = ?", false, "Public"]  
+  scope :end_date_reached, :order => "end_date DESC", :conditions => ["status = ? and end_date < ?", "Undecided", Time.now]   
+    # scope :all_for_friends, lambda{ |friends|
+    #       {
+    #         :joins      => {:users, :friendships},
+    #         :conditions => {:friendships => {:group_id => friends.id},
+    #         :select     => "DISTINCT `comments`.*"
+    #       }
+    #     }
   self.per_page = 10
-  search_methods :end_date_reached
-  
+  # search_methods :end_date_reached
+  scope :private_bets, lambda{ |user|
+        {
+          :joins => "JOIN (SELECT friend_id AS user_id 
+                                    FROM   friendships 
+                                    WHERE  user_id = #{user.id} UNION SELECT #{user.id}
+                              ) AS friends ON bets.user_id = friends.user_id",
+          :conditions => ["visibility = ?", "Private"]                       
+        }
+      }
+      
+  scope :default, lambda{ |user|
+        {
+          :joins => "JOIN (SELECT friend_id AS user_id 
+                                    FROM   friendships 
+                                    WHERE  user_id = #{user.id} UNION SELECT #{user.id}
+                              ) AS friends ON bets.user_id = friends.user_id WHERE confirmed = 't' AND visibility = 'Private' UNION SELECT bets.* FROM bets",
+          :conditions => ["confirmed = ? AND visibility = ?", true, "Public"]                 
+        }
+      }    
+    
   def end_date_is_valid
       if ((DateTime.parse(end_date.to_s) rescue ArgumentError) == ArgumentError)
         errors.add(:end_date, 'must be a valid datetime') 

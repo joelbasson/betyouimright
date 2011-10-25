@@ -1,0 +1,39 @@
+<% title @bets.current_page < 2 ? "Latest Bets" : "Latest Bets - Page #{@bets.current_page}", show_title = false %>
+
+<div class="intro-text">
+	Arguing with someone that thinks they're right when they're not? Tell them to put their money where their mouth is! Tell them "<%= APP_CONFIG["human_application_name"] %>!" Create your bet, put some credits on it, and dare them to bet against you. You can each bet as many times as you want, and other people can join in if they want. <br />
+	Win more Credits to bet with, build your Bragging Score and show the world who is always right! <%= link_to "How to play", "/how", :class => "fancybox" %>
+</div>	
+
+<p class="center smaller-bottom-margin"><%= link_to "Create a New Bet now >>", new_bet_path, :class => "red-text very-big-text pulsedbox" %></p>
+
+<div class="clear"></div>
+	
+<div class="search">	
+	<%= form_tag private_bets_path, :method => 'get' do %>  
+	  <p>  
+	    <%= text_field_tag :search, params[:search], :placeholder => "Search title, description or person"  %>  
+	    <%= submit_tag "Search", :name => nil, :disable_with => "Please wait..." %>  
+	  </p>  
+	<% end %>
+</div>
+
+<%= render 'shared/top_categories' %>
+
+<div class="clear"></div>
+
+<div id="search-title"></div>
+
+
+<div class="bet-type-heading"><h3>You and your friends bets</h3></div>
+
+<%= render :partial => 'bets', :locals => { :bets => @bets } %>
+
+
+<div class="clear"></div>
+
+<div class="fb-like-general"><fb:like href="<%= root_url %>" show_faces="false" width="285" font=""></fb:like></div>
+
+<% cache("daily-quote", :expires_in => 1.day) do %>
+	<p id="daily-quote"><em><%= get_daily_quote %></em></p>
+<% end %>

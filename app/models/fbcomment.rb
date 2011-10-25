@@ -21,6 +21,8 @@ class Fbcomment
     else
       return Array.new
     end
+  rescue 
+    return Array.new
   end
   
   def self.build_comments(comments)

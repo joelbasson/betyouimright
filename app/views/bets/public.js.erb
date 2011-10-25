@@ -1,0 +1,17 @@
+if ($("#previews").length>0)
+{
+	<% if is_facebook? %>
+		$("#previews").replaceWith("<%= escape_javascript(render :file => 'bets/_bets.fb.erb', :locals => { :bets => @bets }) %>");
+	<% else %>
+		$("#previews").replaceWith("<%= escape_javascript(render 'bets') %>");
+	<% end %>
+	
+	$("#bet-type-heading #public").addClass("current");
+	$("#bet-type-heading #private").removeClass("current");
+	
+	<% if !@searchtitle.blank? %>
+		$("#search-title").html("Search for '<%= escape_javascript( @searchtitle ) %>'");
+	<% else %>
+		$("#search-title").html("");
+	<% end %>	
+}

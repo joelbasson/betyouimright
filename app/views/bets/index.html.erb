@@ -1,4 +1,4 @@
-<% title @bets.current_page < 2 ? "Latest Bets" : "Latest Bets - Page #{@bets.current_page}", show_title = false %>
+<% title "Latest Bets", show_title = false %>
 
 <div class="intro-text">
 	Arguing with someone that thinks they're right when they're not? Tell them to put their money where their mouth is! Tell them "<%= APP_CONFIG["human_application_name"] %>!" Create your bet, put some credits on it, and dare them to bet against you. You can each bet as many times as you want, and other people can join in if they want. <br />
@@ -8,27 +8,13 @@
 <p class="center smaller-bottom-margin"><%= link_to "Create a New Bet now >>", new_bet_path, :class => "red-text very-big-text pulsedbox" %></p>
 
 <div class="clear"></div>
-	
+
 <div class="search">	
-	<%= form_for @search, :remote => true do |f| %>
-	  <p>
-	    <%= f.label :title_or_description_or_user_display_name_contains, 'Search' %>
-	    <%= f.search_field :title_or_description_or_user_display_name_contains, :placeholder => "Search title, description or person" %>
-		<% if current_user.try(:admin?) %>	
-			<%= f.label :confirmed_is_false, 'New?' %>
-			<%= f.check_box :confirmed_is_false %>
-		<% end %>
-		<%= f.submit "Search", :disable_with => "Please wait..." %>
-	  </p>
-	<% end %>
-	<% if current_user.try(:admin?) %>	
-		<%= form_for @search, :remote => true do |f| %>
-		  <p>
-				<%= f.label :end_date_reached, 'Pending?' %>
-				<%= f.check_box :end_date_reached %>
-				<%= f.submit "Pending", :disable_with => "Please wait..." %>
-		  </p>
-		<% end %>
+	<%= form_tag bets_path, :method => 'get' do %>  
+	  <p>  
+	    <%= text_field_tag :search, params[:search], :placeholder => "Search title, description or person"  %>  
+	    <%= submit_tag "Search", :name => nil, :disable_with => "Please wait..." %>  
+	  </p>  
 	<% end %>
 </div>
 
@@ -38,7 +24,16 @@
 
 <div id="search-title"></div>
 
-<%= render 'bets' %>
+<div id="bet-type-heading">
+	<div id="public" class="current"><%= link_to "Public Bets", public_bets_path, :remote => true %></div>
+	<div id="private"><%= link_to "Private Bets", private_bets_path, :remote => true %></div>
+</div>
+
+<div class="clear"></div>
+
+<%= render :partial => 'bets.html.erb', :locals => { :bets => @bets } %>
+
+<div class="clear"></div>
 
 <div class="fb-like-general"><fb:like href="<%= root_url %>" show_faces="false" width="285" font=""></fb:like></div>
 

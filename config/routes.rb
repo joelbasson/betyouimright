@@ -1,5 +1,9 @@
 Betyouimright::Application.routes.draw do
   
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :bonuses
 
   resources :notifications
@@ -44,6 +48,11 @@ Betyouimright::Application.routes.draw do
   end  
 
   resources :bets do
+    collection do
+        get 'search'
+        get 'public'
+        get 'private'
+      end
     resources :wagers, :except => [:index, :show, :create, :new, :destroy]
     resources :comments
   end  

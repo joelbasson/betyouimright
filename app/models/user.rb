@@ -13,19 +13,47 @@ class User < ActiveRecord::Base
   has_many :notifications, :dependent => :destroy, :order => "created_at DESC", :conditions => {:closed => false}
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
-  scope :by_scores, joins(:wallet) & Wallet.by_scores
-  scope :top10, by_scores.limit(10)
-    
+  has_many :friendships, :dependent => :destroy
+  has_many  :friends, 
+            :through => :friendships do
+      def bets
+        @bets ||=Bet.where("user_id = ? AND visibility = 'Private'", map(&:id)) 
+        # find_all_by_user_id(map(&:id)).where("")
+      end
+  end
+  scope :by_scores, lambda {
+      joins("join wallets on users.wallet_id = wallets.id").
+      where("wallets.score >= ?", 0).
+      order("wallets.score DESC")
+    }
+  scope :top10, by_scores.take(10)
+  
+  def friend_bets
+      @private_bets ||=Bet.find(:all, 
+               :joins => "JOIN (SELECT friend_id AS user_id 
+                                FROM   friendships 
+                                WHERE  user_id = #{self.id}
+                          ) AS friends ON bets.user_id = friends.user_id WHERE bets.visibility = 'Private'")
+  end
+  
+  def private_bets
+    @private_bets ||= friend_bets + bets.private
+  end
+  
   def apply_omniauth(omniauth)  
     self.email = omniauth['user_info']['email'] if omniauth['user_info']['email']
+    self.fbidentifier = omniauth['uid']
     if omniauth['user_info']['nickname'] && !omniauth['user_info']['nickname'].blank? 
       self.display_name = omniauth['user_info']['nickname']
     else
       self.display_name = omniauth['user_info']['name']
     end
-    
     self.profile = omniauth['user_info']['image']
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])  
+    
+    fbuser = FbGraph::User.new('me', :access_token => omniauth['credentials']['token'] )
+    fbuser.fetch
+    fb_friends_identifiers = fbuser.friends.collect {|f| f.identifier }
+    friends =  User.find_all_by_fbidentifier(fb_friends_identifiers)
   end
     
   def rank

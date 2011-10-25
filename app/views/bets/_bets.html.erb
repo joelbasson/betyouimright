@@ -2,15 +2,17 @@
 	
 	<p class="sort-links">
 	  Sort by:
-	  <%= sort_link @search, :end_date, 'Ending' %> |
-	  <%= sort_link @search, :created_at, 'Newest'%> | 
-	  <%= sort_link @search, :wagers_count, 'Popularity' %>
+	  <%= sortable "end_date", "Ending" %> |
+	  <%= sortable "created_at", "Newest" %> | 
+	  <%= sortable "wagers_count", "Popularity"  %>
 	</p>
+	
+	<div class="clear"></div>
 	
 	<% if @bets.size == 0 %>
 		&nbsp
 	<% end %>
-	<%= render @bets %>
+	<%= render :partial => "bet", :collection => @bets %>
 	<div class="clear"></div>
 	<%= will_paginate @bets, :params => {:format => nil} %>
 	

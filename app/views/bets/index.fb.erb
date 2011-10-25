@@ -16,12 +16,11 @@
 <div class="clear"></div>
 	
 <div class="search">	
-	<%= form_for @search, :remote => true do |f| %>
-	  <p>
-	    <%= f.label :title_or_description_or_user_display_name_contains, 'Search' %>
-	    <%= f.search_field :title_or_description_or_user_display_name_contains, :placeholder => "Search title, description or person" %>
-		<%= f.submit "Search", :disable_with => "Please wait..." %>
-	  </p>
+	<%= form_tag bets_path, :method => 'get' do %>  
+	  <p>  
+	    <%= text_field_tag :search, params[:search], :placeholder => "Search title, description or person"  %>  
+	    <%= submit_tag "Search", :name => nil, :disable_with => "Please wait..." %>  
+	  </p>  
 	<% end %>
 </div>
 
@@ -31,7 +30,22 @@
 
 <div id="search-title"></div>
 
-<%= render 'bets.html.erb' %>
+<div id="bet-type-heading">
+	<div id="public" class="current"><%= link_to "Public Bets", public_bets_path, :remote => true %></div>
+	<div id="private"><%= link_to "Private Bets", private_bets_path, :remote => true %></div>
+</div>
+
+<div class="clear"></div>
+
+<div id="previews">
+
+	<%= render :partial => 'bets.html.erb', :locals => { :bets => @bets } %>
+
+	<div class="clear"></div>
+
+</div>
+
+<div class="clear"></div>
 
 <div class="fb-like-general"><fb:like href='<%= APP_CONFIG['facebook_url'] %>' show_faces='false' width='350' font=''></fb:like></div>
 

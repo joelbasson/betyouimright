@@ -2,7 +2,8 @@ class Wallet < ActiveRecord::Base
   has_one :user
   has_and_belongs_to_many :awards
   has_many :transactions, :order => "created_at DESC"
-  scope :by_scores, :order => "score DESC", :conditions => ["score >= ? AND display_name != ''", 0]  
+  # scope :by_scores, :order => "score DESC", :conditions => ["score >= ? AND display_name != ''", 0]  
+  scope :by_scores, :order => "score DESC", :conditions => ["score >= ?", 0]  
   validates_numericality_of :credits
     
   def add_points(points)

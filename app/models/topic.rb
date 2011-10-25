@@ -33,10 +33,11 @@ class Topic < ActiveRecord::Base
   
   private
     def create_initial_post
-      returning self.posts.build(:body => self.body) do |post|
+      theposts = self.posts.build(:body => self.body) do |post|
         post.forum = self.forum
         post.user = self.user
         post.save
       end
+      theposts
     end
 end

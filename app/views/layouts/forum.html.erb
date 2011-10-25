@@ -4,12 +4,12 @@
     <title><%= content_for?(:title) ?  APP_CONFIG["application_name"] + " - " +  yield(:title) : APP_CONFIG["application_name"] %></title>
 	<meta name="description" content="Bet people that you are right about something and show them who is Mr Always Right" />
 	<meta name="keywords" content="Betting, Right, Wager, Prove, Brag" />
-    <%= stylesheet_link_tag "application", "formtastic", "formtastic_changes", 'community', "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/cupertino/jquery-ui.css" %>
-	<link rel="stylesheet" media="all and (max-width: 770px)" href="/stylesheets/ipad-portrait.css" />
-	<link rel="stylesheet" media="all and (max-width: 1179px)" href="/stylesheets/ipad-portrait.css" />
-	<link rel="stylesheet" media="all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" href="/stylesheets/ipad-landscape.css" /> 
-	<link rel="stylesheet" media="all and (min-width: 1180px)" href="/stylesheets/widescreen.css" />
-    <%= javascript_include_tag :defaults, 'location' %>
+    <%= stylesheet_link_tag    "community" %>
+	<link rel="stylesheet" media="all and (max-width: 770px)" href="/assets/custom/ipad-portrait.css" />
+	<link rel="stylesheet" media="all and (max-width: 1179px)" href="/assets/custom/ipad-portrait.css" />
+	<link rel="stylesheet" media="all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" href="/assets/custom/ipad-landscape.css" /> 
+	<link rel="stylesheet" media="all and (min-width: 1180px)" href="/assets/custom/widescreen.css" />
+    <%= javascript_include_tag "application" %>
 	<%= auto_discovery_link_tag(:atom, bets_feed_path(:only_path => false)) %>
 	<meta property="fb:app_id" content="<%= APP_CONFIG["fb_app_id"] %>" />
 	<meta property="og:title" content="Bet you Im Right" />

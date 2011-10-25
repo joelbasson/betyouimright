@@ -19,7 +19,7 @@ end
 
 require 'openid/store/filesystem'
 require "openid/fetchers"
-require "lib/mywebbylife_authorization"
+require "mywebbylife_authorization"
 OpenID.fetcher.ca_file = "#{Rails.root}/config/certs/ca-bundle.crt" 
 Rails.application.config.middleware.use OmniAuth::Builder do  
   provider :twitter, 'AtSWWYAteESuD9q8CeHw', 'HkpgauiFuoUSGZScJ4njpVGT4FLuI8VLLP3G8Aql9RI'  
