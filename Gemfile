@@ -20,7 +20,6 @@ end
 
 gem 'sass-rails', "  ~> 3.1.0"
 gem 'jquery-rails'
-gem 'execjs'
 
 # Use unicorn as the web server
 # gem 'unicorn'
