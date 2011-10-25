@@ -303,7 +303,6 @@ DEPENDENCIES
   dalli
   devise!
   exception_notification!
-  execjs
   fb_graph
   formtastic
   heroku
