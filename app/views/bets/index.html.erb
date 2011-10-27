@@ -26,7 +26,13 @@
 
 <div id="bet-type-heading">
 	<div id="public" class="current"><%= link_to "Public Bets", public_bets_path, :remote => true %></div>
-	<div id="private"><%= link_to "Private Bets", private_bets_path, :remote => true %></div>
+	<div id="private">
+		<% if user_signed_in? %>
+			<%= link_to "Private Bets", private_bets_path, :remote => true %>
+		<% else %>
+			<%= link_to "Private Bets", root_url(:subdomain => false) + "auth/facebook"  %>
+		<% end %>
+	</div>
 </div>
 
 <div class="clear"></div>
