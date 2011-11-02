@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
       where("wallets.score >= ?", 0).
       order("wallets.score DESC")
     }
-  scope :top10, by_scores.take(10)
+  scope :top10, by_scores.limit(10)
   
   def friend_bets
       @private_bets ||=Bet.find(:all, 

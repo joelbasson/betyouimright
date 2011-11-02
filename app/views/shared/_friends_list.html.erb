@@ -1,0 +1,12 @@
+<div id="container-right" class="">
+	<% if user_signed_in? %>
+	<div class="image-gallery">
+		<h3>Your friends</h3>
+		<% current_user.friends.limit(10).each do |user| %>
+			<div class="image-gallery-photo"><%= image_tag user.profile, :alt => user.display_name, :title => user.display_name %></div>
+		<% end %>
+	</div>
+	<% else %>
+		<fb:facepile href="<%= root_url(:subdomain => false) %>" width="200" max_rows="20"></fb:facepile>
+	<% end %>
+</div>	

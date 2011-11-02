@@ -50,8 +50,7 @@
 		      		<%= yield %>
 				</div>
 				<% if !session[:facebook_canvas] && !is_iphone? %>
-					<div id="container-right" class="">
-						<fb:facepile href="<%= root_url(:subdomain => false) %>" width="200" max_rows="20"></fb:facepile></div>
+					<%= render 'shared/friends_list' %>
 				<% end %>
 				<div class="clear"></div>
 		    </div>	

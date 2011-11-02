@@ -83,7 +83,7 @@ Amount of posts : <%= current_user.posts.size %><br />
 
 <%= render 'transactions/my_transactions', :transactions => @wallet.transactions.paginate(:per_page => 10, :page => 1) %>
 
-<% javascript "facebook_friends" %>
+<% javascript "javascripts/facebook_friends" %>
 
 <% content_for :fb_javasctipts do %>
 	getFBFriends();
