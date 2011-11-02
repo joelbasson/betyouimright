@@ -17,11 +17,7 @@
 		</div>
     <% else %>
 		<div id="login-nav" class="left">
-			<% if session[:facebook_canvas] %>
-				<%= link_to "Sign in", root_url(:subdomain => false) + "auth/facebook" %>
-			<% else %>
-				<%= link_to "Sign in", user_session_url(:subdomain => false) %>
-			<% end %>
+			<%= link_to "Sign in", root_url(:subdomain => false) + "auth/facebook" %>
 		</div>
     <% end %>
 </div>

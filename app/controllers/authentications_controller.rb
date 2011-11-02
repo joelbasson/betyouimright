@@ -42,6 +42,7 @@ class AuthenticationsController < ApplicationController
       user = User.find_by_email(omniauth['user_info']['email'])
       if user
         user.authentications.create(:provider => omniauth['provider'], :uid => omniauth['uid'])  
+        user.apply_omniauth(omniauth)  
         user.save
         flash[:notice] = "Signed in successfully - Added #{omniauth['provider']} access to existing account."  
         sign_in(:user, user) 

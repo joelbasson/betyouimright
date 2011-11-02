@@ -41,19 +41,22 @@ class User < ActiveRecord::Base
   end
   
   def apply_omniauth(omniauth)  
-    self.email = omniauth['user_info']['email'] if omniauth['user_info']['email']
-    self.fbidentifier = omniauth['uid']
+    self.email = omniauth['user_info']['email']
+    self.fbidentifier = omniauth['uid'] 
     if omniauth['user_info']['nickname'] && !omniauth['user_info']['nickname'].blank? 
       self.display_name = omniauth['user_info']['nickname']
     else
       self.display_name = omniauth['user_info']['name']
     end
     self.profile = omniauth['user_info']['image']
+    self.fbtoken = omniauth['credentials']['token']
     
     fbuser = FbGraph::User.new('me', :access_token => omniauth['credentials']['token'] )
     fbuser.fetch
     fb_friends_identifiers = fbuser.friends.collect {|f| f.identifier }
-    friends =  User.find_all_by_fbidentifier(fb_friends_identifiers)
+    self.fbfriendscollection = fb_friends_identifiers
+    self.fbtoken_updated_at = Time.now
+    self.friends =  User.find_all_by_fbidentifier(fb_friends_identifiers)
   end
     
   def rank
