@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102204731) do
+ActiveRecord::Schema.define(:version => 20111102205726) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -273,8 +273,8 @@ ActiveRecord::Schema.define(:version => 20111102204731) do
     t.string   "profile"
     t.string   "fbidentifier"
     t.string   "fbtoken"
-    t.string   "fbfriendscollection"
     t.datetime "fbtoken_updated_at"
+    t.text     "fbfriendscollection"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
