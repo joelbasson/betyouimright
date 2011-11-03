@@ -3,7 +3,7 @@
 	<div class="image-gallery">
 		<h3>Your friends</h3>
 		<% current_user.friends.limit(10).each do |user| %>
-			<div class="image-gallery-photo"><%= link_to image_tag(user.profile), publicprofile_path(user), :alt => user.display_name, :title => user.display_name %></div>
+			<div class="image-gallery-photo"><%= link_to image_tag(user.profile, :class => "small-zoom", :alt => user.display_name), publicprofile_path(user), :title => user.display_name %></div>
 		<% end %>
 	</div>
 	<% else %>
