@@ -123,7 +123,25 @@ $(function() {
 			return false;
 		});
 		
-
+		$("#bet_visibility").change(function(){
+			if ($("#bet_visibility").val() == "Private"){
+				$("#bet_challengee_token_input").slideDown();
+			}
+			else{
+				$("#bet_challengee_token_input").hide();
+			}
+		});
+		
+		$("#bet_challengee_token").tokenInput("/users/friends.json", {
+		    crossDomain: false,
+		    prePopulate: $("#bet_challengee_token").data("pre"),
+		    theme: "facebook", 
+			minChars: 3, 
+			tokenLimit: 1,
+			hintText: "Begin typing the user name of the person you wish to assign.",
+			noResultsText: "No results",
+			searchingText: "Searching..."
+		 });
 });
 
 function flashNotice() {

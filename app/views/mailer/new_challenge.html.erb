@@ -1,0 +1,3 @@
+<div class="left">Hi <%= @bet.challengee.display_name %>, you were challenged to a bet by <%= @bet.user.display_name %> at <%= APP_CONFIG["application_name"] %>. Click <%= link_to "here", url_for(:only_path => false, :controller => 'bets', :action => 'show', :id => @bet.to_param), :title => "Show details of " + @bet.title + " bet"  %> to view it</div>
+
+-- <%= @bet.title %> --

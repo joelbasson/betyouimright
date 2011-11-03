@@ -7,7 +7,7 @@
 	  <%= sortable "wagers_count", "Popularity"  %>
 	</p>
 	
-	<div class="clear"></div>
+	<div class="clear spacer"></div>
 	
 	<% if @bets.size == 0 %>
 		&nbsp
@@ -15,6 +15,7 @@
 	<%= render :partial => "bet", :collection => @bets %>
 	<div class="clear"></div>
 	<%= will_paginate @bets, :params => {:format => nil} %>
+	<div class="clear spacer"></div>
 	
 </div>
 

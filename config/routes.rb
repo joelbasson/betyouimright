@@ -23,6 +23,7 @@ Betyouimright::Application.routes.draw do
   match '/bets/feed', :controller => 'bets', :action => 'feed', :format => 'atom'
   match '/users/:user_id/publicprofile' => 'users#publicprofile', :as => :publicprofile
   match '/users/index' => 'users#index', :as => "users"
+  match '/users/friends' => 'users#friends', :as => "userfriends"
   match '/users/:id/toggleadmin' => 'users#toggleadmin', :as => :toggleadmin
   match '/wagers/my_wagers' => 'wagers#my_wagers', :as => :my_wagers
   match '/bets/my_bets' => 'bets#my_bets', :as => :my_bets

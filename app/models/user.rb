@@ -43,11 +43,7 @@ class User < ActiveRecord::Base
   def apply_omniauth(omniauth)  
     self.email = omniauth['user_info']['email']
     self.fbidentifier = omniauth['uid'] 
-    if omniauth['user_info']['nickname'] && !omniauth['user_info']['nickname'].blank? 
-      self.display_name = omniauth['user_info']['nickname']
-    else
-      self.display_name = omniauth['user_info']['name']
-    end
+    self.display_name = omniauth['user_info']['name']
     self.profile = omniauth['user_info']['image']
     self.fbtoken = omniauth['credentials']['token']
     
@@ -65,6 +61,15 @@ class User < ActiveRecord::Base
   
   def username
     return display_name
+  end
+  
+  def to_simple_array
+    hash = {
+            :id => id,
+            :name => display_name,
+            :label => display_name
+          }
+    hash      
   end
   
   protected

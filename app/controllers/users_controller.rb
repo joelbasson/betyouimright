@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html, :xml, :json, :js
   before_filter :authenticate_user!
-  before_filter :authenticate_admin, :except => [:publicprofile]
+  before_filter :authenticate_admin, :except => [:publicprofile, :friends]
   
   def index
     @search = User.search(params[:search])
@@ -20,5 +20,13 @@ class UsersController < ApplicationController
       format.html { redirect_to :action => "index" }
     end
   end  
+  
+  def friends
+    @users = current_user.friends.where("display_name like ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.html
+      format.json { render :json => @users.map { |val| val.to_simple_array} }
+    end
+  end
     
 end

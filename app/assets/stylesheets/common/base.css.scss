@@ -1690,36 +1690,47 @@ div.purchase div
 #bet-type-heading
 {
 	padding-left:5%;
+	
 	#public, #private
 	{
 		width:45%;
 		float:left;
 		text-align:center;
-		background-color: #5B74A8;
+		background-color: #EEE;
 		background-position: 0 -48px;
 		border-color: #29447E #29447E #1A356E;
 		padding: 2px 6px !important;
 		-moz-box-shadow: 0px 0px 5px #999;-webkit-box-shadow: 0px 0px 5px #999;
 		border: 1px solid #556f8c;
 		cursor: pointer;
-		color:white;
+		color:black;
 		font-size: 11px;
 		font-weight: bold;
 		margin: 0;
 		
 		a
 		{
-		color:white;	
+		color:black;	
 		}
+		
 	}
 	
 	#public.current, #private.current
 	{
-		background-color:#EEE;
+		background-color: #5B74A8;
 		
 		a
 		{
-			color:black;
+			color:white;
 		}
 	}
+}
+
+#search{
+	width:200px;
+}
+
+#bet_challengee_token_input
+{
+	display:none;
 }

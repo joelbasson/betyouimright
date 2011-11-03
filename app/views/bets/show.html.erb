@@ -17,6 +17,9 @@
 			<div class="bet-generic-line left simple-clear"><%= most_confident(@bet) %></div>
 			<div class="bet-verify-description left simple-clear">How to verify bet : <%= @bet.verify_description %></div>	
 			<div class="bet-display-name left simple-clear"><%= link_to @bet.user.display_name, publicprofile_path(@bet.user) %> <%= taunt(@bet) %></div>
+			<% if @bet.visibility == "Private" %>
+				<div class="bet-display-name left simple-clear">Challengee : <%= link_to @bet.challengee.display_name, publicprofile_path(@bet.challengee) %></div>
+			<% end %>	
 			<div class="right simple-clear facebook-buttons">
 				<div id="d_clip_container" style="position:relative" class="left">
 				   <div id="d_clip_button">Copy to Clipboard</div>

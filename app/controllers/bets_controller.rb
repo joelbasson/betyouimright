@@ -123,6 +123,7 @@ class BetsController < ApplicationController
       @bet.user.wallet.transactions.create!(:description => "Created Bet for #{@bet.wager_amount.to_s} credits.", :bet_id => @bet)
       @bet.add_topic
       Mailer.delay.new_bet(@bet)
+      Mailer.delay.new_challenge(@bet)
       flash[:notice] = "Successfully created bet."
       respond_with(@bet)
     else
