@@ -54,6 +54,7 @@ gem 'rack' , '1.3.5'
 gem 'oa-openid', :require => 'omniauth/openid'
 gem "oa-oauth", :require => "omniauth/oauth"
 
+
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
