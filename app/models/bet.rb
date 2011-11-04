@@ -6,7 +6,7 @@ class Bet < ActiveRecord::Base
   has_one :topic
   belongs_to :bet_category
   belongs_to :challengee, :class_name => "User", :foreign_key => "challengee_id"
-  attr_accessible :title, :description, :visibility, :bet_category_id, :end_date, :wager_amount, :verify_description, :verified, :confirmed, :user_id, :wagers_count, :status, :challengee_token
+  attr_accessible :title, :description, :visibility, :bet_category_id, :end_date, :wager_amount, :verify_description, :verified, :confirmed, :user_id, :wagers_count, :status, :challengee, :challengee_token
   attr_reader :challengee_token
   validates_numericality_of :wager_amount, 
              :less_than_or_equal_to => 20, 

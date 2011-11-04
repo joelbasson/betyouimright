@@ -33,7 +33,7 @@ gem 'jquery-rails'
 gem "json_pure", "1.5.0"
 gem "nifty-generators"
 gem "devise", :git => "https://github.com/plataformatec/devise.git"
-gem "omniauth"
+gem "omniauth", "~> 0.3.2"
 gem "formtastic"
 gem "will_paginate", "3.0.pre2"
 gem 'dalli'
@@ -51,8 +51,6 @@ gem "exception_notification", :git => "http://github.com/rails/exception_notific
 gem "fb_graph"
 gem 'activeadmin', :git  => "https://github.com/gregbell/active_admin.git"
 gem 'rack' , '1.3.5'
-gem 'oa-openid', :require => 'omniauth/openid'
-gem "oa-oauth", :require => "omniauth/oauth"
 
 
 group :test do
