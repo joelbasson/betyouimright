@@ -1673,7 +1673,7 @@ img.preview:hover{
 
 }
 
-img.small-zoom{
+.small-zoom{
 -webkit-transform:scale(1.0); /*Webkit: Scale down image to 0.8x original size*/
 -moz-transform:scale(1.0); /*Mozilla scale version*/
 -o-transform:scale(1.0); /*Opera scale version*/
@@ -1682,7 +1682,7 @@ img.small-zoom{
 -o-transition-duration: 0.5s; /*Opera duration version*/
 }
 
-img.small-zoom:hover{
+.small-zoom:hover{
 	z-index:21;
 -webkit-transform:scale(2.0); /*Webkit: Scale up image to 1.2x original size*/
 -moz-transform:scale(2.0); /*Mozilla scale version*/
