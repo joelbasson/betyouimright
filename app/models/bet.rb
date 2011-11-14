@@ -17,6 +17,7 @@ class Bet < ActiveRecord::Base
   validates :verify_description, :presence => true, :length => { :minimum => 20, :maximum => 500 }
   validates :end_date, :presence => true, :valid_date => true, :on => :create
   validate :wager_amount_is_valid_amount
+  validate :private_bet_has_chanllengee
   scope :standard, :order => "verified ASC, end_date DESC", :conditions => ["confirmed = ?", true] 
   scope :public_bets, :order => "verified ASC", :conditions => ["confirmed = ? AND visibility = ?", true, "Public"]  
   scope :unconfirmed, :order => "created_at DESC", :conditions => ["confirmed = ? AND visibility = ?", false, "Public"]  
@@ -63,7 +64,7 @@ class Bet < ActiveRecord::Base
   end
   
   def private_bet_has_chanllengee
-    errors.add_to_base("You need add a challengee") if (visibility == "Private" && challengee.nil?)
+    errors.add(:challengee, "You need add a challengee") if (visibility == "Private" && challengee.nil?)
   end
   
   def validity_status

@@ -123,7 +123,7 @@ $(function() {
 			return false;
 		});
 		
-		$("#bet_visibility").change(function(){
+		$("#bet_visibility").live('change', function(){
 			if ($("#bet_visibility").val() == "Private"){
 				$("#bet_challengee_token_input").slideDown();
 			}
