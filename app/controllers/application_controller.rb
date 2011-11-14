@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
     helper_method :is_facebook?
 
     def prepare_for_facebook
-      request.format = :fb if request.format != :js && is_facebook?
+      request.format = :fb if request.format != :js && request.format != :json && is_facebook?
     end
     
     def check_facebook_canvas
