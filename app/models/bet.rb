@@ -62,6 +62,10 @@ class Bet < ActiveRecord::Base
     errors.add_to_base("You need at least 1 credit to create a bet. Please purchase more credits") if (wager_amount > user.wallet.credits )
   end
   
+  def private_bet_has_chanllengee
+    errors.add_to_base("You need add a challengee") if (visibility == "Private" && challengee.nil?)
+  end
+  
   def validity_status
     if self.status == "Undecided" && self.end_date < Time.now
       return "Pending"
