@@ -61,15 +61,16 @@ Betyouimright::Application.routes.draw do
   resources :transactions, :only => [:index]
   resources :bragging, :only => [:index]
   
-  devise_for :users
-  match '/auth/:provider/callback' => 'authentications#create'  
-  match '/auth/failure', :to => 'authentications#failure'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  match '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  # match '/auth/:provider/callback' => 'authentications#create'  
+  # match '/auth/failure', :to => 'authentications#failure'
   match '/transactions/my_transactions' => 'transactions#my_transactions', :as => :my_transactions
   match '/bets/:bet_id/comments/cancel' => 'comments#cancel', :as => :cancel_bet_comment
   match '/bets/:bet_id/wagers/:against' => 'wagers#bet_now', :as => :bet_now
   match '/sitemap', :controller => 'sitemaps', :action => 'index', :format => 'xml'
   match '/:action' => 'static#:action'
-  match '/auth/facebook/setup', :to => 'authentications#setup'
+  # match '/auth/facebook/setup', :to => 'authentications#setup'
   match '/javascripts/:action.:format', :controller => 'javascripts'
   match '/bets/:id' => 'bets#show', :via => [:get, :post]
   constraints(Subdomain) do  

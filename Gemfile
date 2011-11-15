@@ -33,7 +33,9 @@ gem 'jquery-rails'
 gem "json_pure", "1.5.0"
 gem "nifty-generators"
 gem "devise", :git => "https://github.com/plataformatec/devise.git"
-gem "omniauth", "~> 0.3.2"
+# gem "omniauth", "~> 0.3.2"
+gem "omniauth"
+gem "omniauth-facebook"
 gem "formtastic"
 gem "will_paginate", "3.0.pre2"
 gem 'dalli'

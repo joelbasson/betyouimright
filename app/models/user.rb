@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :profile
@@ -38,6 +38,28 @@ class User < ActiveRecord::Base
   
   def private_bets
     @private_bets ||= friend_bets + bets.private
+  end
+  
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    if user = User.find_by_email(access_token['info']['email'])   
+    else # Create a user with a stub password. 
+      User.create(:email => data["email"], :encrypted_password => Devise.friendly_token[0,20]) 
+    end
+    user.email = access_token['info']['email']
+    user.fbidentifier = access_token['uid'] 
+    user.display_name = access_token['info']['name']
+    user.profile = access_token['info']['image']
+    user.fbtoken = access_token['credentials']['token']
+    
+    fbuser = FbGraph::User.new('me', :access_token => access_token['credentials']['token'] )
+    fbuser.fetch
+    fb_friends_identifiers = fbuser.friends.collect {|f| f.identifier }
+    user.fbfriendscollection = fb_friends_identifiers
+    user.fbtoken_updated_at = Time.now
+    user.friends =  User.find_all_by_fbidentifier(fb_friends_identifiers)
+    
+    user.save
+    user
   end
   
   def apply_omniauth(omniauth)  

@@ -77,8 +77,10 @@ class AuthenticationsController < ApplicationController
   
   def setup
     if is_facebook?
+      puts "JOEL"
       request.env['omniauth.strategy'].options = {:iframe => true, :canvas => true} 
     else
+      puts "BASSON"
       request.env['omniauth.strategy'].options = {:iframe => true, :canvas => false} 
     end
     render :text => "Setup complete.", :status => 404
