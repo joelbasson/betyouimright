@@ -24,7 +24,7 @@
 <span class="auth_provider disabled">
   <%= image_tag "png/twitter_64.png", :size => "64x64",
   :alt => "Twitter" %>Twitter</span>  
-<a href="/auth/facebook" class="auth_provider">  
+<a href=<%= user_omniauth_authorize_path(:facebook) %> class="auth_provider">  
   <%= image_tag "png/facebook_64.png", :size => "64x64", 
   :alt => "Facebook" %>Facebook<br />(Recommended)</a>  
 <a href="/auth/google_apps" class="auth_provider">  
