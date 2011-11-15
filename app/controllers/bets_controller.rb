@@ -34,7 +34,7 @@ class BetsController < ApplicationController
     end
     
     if params[:search]
-      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+      @bets = @bets.joins(:user).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
     end 
     
     @searchtitle = params[:search].to_s
@@ -50,7 +50,7 @@ class BetsController < ApplicationController
     end
     
     if params[:search]
-      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+      @bets = @bets.joins(:user).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
     end 
     
     @searchtitle = params[:search].to_s
@@ -66,7 +66,7 @@ class BetsController < ApplicationController
     end
     
     if params[:search]
-      @bets = @bets.joins(:users).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
+      @bets = @bets.joins(:user).where("title LIKE '%#{params[:search]}%' OR description like '%#{params[:search]}%' OR users.display_name LIKE '%#{params[:search]}%'")
     end
     
     @searchtitle = params[:search].to_s

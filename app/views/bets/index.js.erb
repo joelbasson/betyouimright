@@ -1,7 +1,7 @@
 if ($("#previews").length>0)
 {
 	<% if is_facebook? %>
-		$("#previews").replaceWith("<%= escape_javascript(render :file => 'bets/_bets.fb.erb') %>");
+		$("#previews").replaceWith("<%= escape_javascript(render 'bets') %>");
 	<% else %>
 		$("#previews").replaceWith("<%= escape_javascript(render 'bets') %>");
 	<% end %>
