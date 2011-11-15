@@ -77,9 +77,9 @@ class AuthenticationsController < ApplicationController
   
   def setup
     if is_facebook?
-      request.env['omniauth.strategy'].options = {:iframe => true, :setup => true, :scope => 'publish_stream,offline_access,email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
+      request.env['omniauth.strategy'].options = {:iframe => true, :canvas => true} 
     else
-      request.env['omniauth.strategy'].options = {:iframe => false, :setup => true, :scope => 'publish_stream,offline_access,email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
+      request.env['omniauth.strategy'].options = {:iframe => true, :canvas => false} 
     end
     render :text => "Setup complete.", :status => 404
   end

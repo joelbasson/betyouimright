@@ -13,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
   
-  def facebook_canvas
+  def facebookcanvas
       @user = User.find_for_facebook_oauth(env["omniauth.auth"], current_user)
 
       if @user.persisted?

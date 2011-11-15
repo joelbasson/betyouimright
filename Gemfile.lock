@@ -8,6 +8,13 @@ GIT
       polyamorous (~> 0.5.0)
 
 GIT
+  remote: git://github.com/joelbasson/omniauth-facebookcanvas.git
+  revision: 8912a39c680bc4b90208d2d11a0a3bd9d1ec5b1f
+  specs:
+    omniauth-facebookcanvas (1.0.0.rc4)
+      omniauth-oauth2 (~> 1.0.0)
+
+GIT
   remote: http://github.com/rails/exception_notification.git
   revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
   specs:
@@ -239,7 +246,7 @@ GEM
     turn (0.8.3)
       ansi
     tzinfo (0.3.31)
-    uglifier (1.0.4)
+    uglifier (1.1.0)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     warden (1.1.0)
@@ -267,6 +274,7 @@ DEPENDENCIES
   nifty-generators
   omniauth
   omniauth-facebook
+  omniauth-facebookcanvas!
   pg
   rack (= 1.3.5)
   rails (= 3.1.0)
