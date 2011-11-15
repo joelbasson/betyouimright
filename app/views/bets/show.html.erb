@@ -163,7 +163,6 @@
 <% if @bet.created_at > 1.minute.ago && user_signed_in? && @bet.user = current_user %>
 	<script language="JavaScript">
 	$(document).ready(function(){
-		setTimeout("spotlightBet()",2000);
 		setTimeout("$('#facebook-button-link').click()",6000);
 	});
 	</script>

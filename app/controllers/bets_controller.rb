@@ -114,7 +114,9 @@ class BetsController < ApplicationController
 
   def create
     @bet = Bet.new(params[:bet])
-    @bet.confirmed = true if current_user.admin?
+    if current_user.admin? || @bet.visibility == "Private"
+      @bet.confirmed = true
+    end  
     @bet.user = current_user
     @bet.wager_amount = 1
     if @bet.save
@@ -144,6 +146,9 @@ class BetsController < ApplicationController
     old_status = @bet.status
     @bet.verified = true if params[:bet][:status] != 'Undecided'
     @bet.attributes = params[:bet] 
+    if current_user.admin? || @bet.visibility == "Private"
+      @bet.confirmed = true
+    end
     @bet.save(:validate => false)
     if @bet.status != old_status && @bet.status != 'Undecided' && @bet.verified
        @bet.assign_winnings(@bet.status == "Won")

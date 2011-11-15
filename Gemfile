@@ -36,7 +36,6 @@ gem "devise", :git => "https://github.com/plataformatec/devise.git"
 # gem "omniauth", "~> 0.3.2"
 gem "omniauth"
 gem "omniauth-facebook"
-gem "omniauth-facebookcanvas", :git => "git://github.com/joelbasson/omniauth-facebookcanvas.git"
 gem "formtastic"
 gem "will_paginate", "3.0.pre2"
 gem 'dalli'

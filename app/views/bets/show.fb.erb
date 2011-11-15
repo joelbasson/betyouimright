@@ -62,7 +62,7 @@
 					<% end %>
 				<% end %>
 			<% else %>
-				<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", user_omniauth_authorize_path(:facebook_canvas), :class => "red-text" %> or <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's right", user_omniauth_authorize_path(:facebook_canvas), :class => "red-text" %>
+				<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", user_omniauth_authorize_path(:facebookcanvas), :class => "red-text" %> or <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's right", user_omniauth_authorize_path(:facebookcanvas), :class => "red-text" %>
 			<% end %>
 		</div>
 		

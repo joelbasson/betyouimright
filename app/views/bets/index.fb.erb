@@ -9,7 +9,7 @@
 	<% if user_signed_in? %>
 		<%= link_to "Create a New Bet now >>", new_bet_path, :class => "fb-button fb-fancybox" %>
 	<% else %>
-		<%= link_to "Create a New Bet now >>", user_omniauth_authorize_path(:facebook_canvas), :class => "fb-button" %>
+		<%= link_to "Create a New Bet now >>", user_omniauth_authorize_path(:facebookcanvas), :class => "fb-button" %>
 	<% end %>
 </p>
 
