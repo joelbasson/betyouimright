@@ -27,13 +27,12 @@
 #   provider :facebook, '104465769636132', 'd6c54950944ebf472fa601719ad6c4e8', :iframe => true, :setup => true  
 #   provider :mywebbylife, "m5uKXnULN2g32fdP", "OEi5ihV35yn2BHx1xkBloncfgCcVRsdc"
 # end
-
-module OmniAuth::Strategies
-
-  class FacebookCanvas < Facebook
-    def name 
-      :facebook_canvas
-    end 
-  end
-
-end
+# module OmniAuth::Strategies
+# 
+#   class FacebookCanvas < Facebook
+#     def name 
+#       :facebook_canvas
+#     end 
+#   end
+# 
+# end
