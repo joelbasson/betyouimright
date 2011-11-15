@@ -62,20 +62,20 @@ class User < ActiveRecord::Base
     user
   end
   
-  def apply_omniauth(omniauth)  
-    self.email = omniauth['user_info']['email']
-    self.fbidentifier = omniauth['uid'] 
-    self.display_name = omniauth['user_info']['name']
-    self.profile = omniauth['user_info']['image']
-    self.fbtoken = omniauth['credentials']['token']
-    
-    fbuser = FbGraph::User.new('me', :access_token => omniauth['credentials']['token'] )
-    fbuser.fetch
-    fb_friends_identifiers = fbuser.friends.collect {|f| f.identifier }
-    self.fbfriendscollection = fb_friends_identifiers
-    self.fbtoken_updated_at = Time.now
-    self.friends =  User.find_all_by_fbidentifier(fb_friends_identifiers)
-  end
+  # def apply_omniauth(omniauth)  
+  #   self.email = omniauth['user_info']['email']
+  #   self.fbidentifier = omniauth['uid'] 
+  #   self.display_name = omniauth['user_info']['name']
+  #   self.profile = omniauth['user_info']['image']
+  #   self.fbtoken = omniauth['credentials']['token']
+  #   
+  #   fbuser = FbGraph::User.new('me', :access_token => omniauth['credentials']['token'] )
+  #   fbuser.fetch
+  #   fb_friends_identifiers = fbuser.friends.collect {|f| f.identifier }
+  #   self.fbfriendscollection = fb_friends_identifiers
+  #   self.fbtoken_updated_at = Time.now
+  #   self.friends =  User.find_all_by_fbidentifier(fb_friends_identifiers)
+  # end
     
   def rank
     User.by_scores.index(self) + 1
