@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
             flash[:notice] = "Welcome back #{authentication.user.display_name}"
             sign_in(:user, authentication.user) 
           else
-            page = user_omniauth_authorize_path(:facebook)
+            page = user_omniauth_authorize_path(:facebook_canvas)
             if request.post? && params[:id]
               page += "?origin=" + CGI::escape("/?bet=" + params[:id])
             end 
