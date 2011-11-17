@@ -60,11 +60,11 @@ class Bet < ActiveRecord::Base
   end
   
   def wager_amount_is_valid_amount
-    errors.add_to_base("You need at least 1 credit to create a bet. Please purchase more credits") if (wager_amount > user.wallet.credits )
+    errors.add("errors", "You need at least 1 credit to create a bet. Please purchase more credits") if (wager_amount > user.wallet.credits )
   end
   
   def private_bet_has_chanllengee
-    errors.add_to_base("You need add a challengee") if (visibility == "Private" && challengee.nil?)
+    errors.add("errors", "You need add a challengee") if (visibility == "Private" && challengee.nil?)
   end
   
   def validity_status

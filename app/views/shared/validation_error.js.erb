@@ -6,5 +6,10 @@ if ($('#errors_for_<%= escape_javascript(@model.class.name.underscore) %>').leng
 }
 $('.inline-errors').remove();
 <% @model.errors.each do |attr,msg| %>
-	$('li#<%= escape_javascript(@model.class.name.underscore) %>_<%= attr.to_s %>_input').append("<p class='inline-errors'><%= msg %></p>");
+	<% if attr.to_s == "errors" %>
+		$("#errors").append("<p class='inline-errors'><%= msg %></p>");
+	<% else %>
+		$('li#<%= escape_javascript(@model.class.name.underscore) %>_<%= attr.to_s %>_input').append("<p class='inline-errors'><%= msg %></p>");
+	<% end  %>
 <% end %>	
+
