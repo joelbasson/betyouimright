@@ -57,10 +57,10 @@ class ApplicationController < ActionController::Base
     def check_time_to_credit
       if current_user
         if !current_user.wallet.nil? && current_user.wallet.pointtime < Time.now
-          current_user.wallet.pointtime = 1.week.from_now
+          current_user.wallet.pointtime = 4.hours.from_now
           current_user.wallet.credits += 2
           current_user.wallet.save
-          flash[:notice] = "You earned another 2 credits"
+          flash[:notice] = "You earned another 1 credit"
         end
       end  
     end

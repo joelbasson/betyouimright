@@ -56,7 +56,8 @@ class Wallet < ActiveRecord::Base
   end  
   
   def rel_time_to_more_credits
-    100 - ((time_to_more_credits * 100 ) / 10080)
+    100 - ((time_to_more_credits * 100 ) / 240)
+    # 100 - time_to_more_credits 
   end
       
 end
