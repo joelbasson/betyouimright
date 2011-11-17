@@ -8,6 +8,7 @@ development:
   default_currency: $
   default_currency_code: USD
   admin_email: joelbasson@me.com
+  admin2_email: marli.steyl@me.com
   paypal_address: 'betmas_1300139163_biz@betyoulose.com'
   paypal_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
   canvas_url: http://localhost:3000
@@ -35,6 +36,7 @@ test:
   default_currency: $
   default_currency_code: USD
   admin_email: joelbasson@me.com
+  admin2_email: marli.steyl@me.com
   paypal_address: 'betmas_1300139163_biz@betyoulose.com'
   paypal_url: https://www.sandbox.paypal.com/cgi-bin/webscr?
   canvas_url: http://localhost:3000
@@ -62,6 +64,7 @@ production:
   default_currency: $
   default_currency_code: USD
   admin_email: joelbasson@me.com
+  admin2_email: marli.steyl@me.com
   paypal_address: 'joelbasson@me.com'
   paypal_url: https://www.paypal.com/cgi-bin/webscr?
   canvas_url: http://apps.facebook.com/betyouimright
