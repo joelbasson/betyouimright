@@ -8,11 +8,11 @@ $('.flash').remove();
 	$(".bet-wager-details").html("<%= escape_javascript(render 'bets/bet_wager_details')  %>")
 	$(".bet-wager-details").effect("highlight", {}, 3000);	
 	<% if is_facebook? %>
-		$("#fancybox-content div:first").prepend('<div class="flash notice" style="display: none"><%= escape_javascript(flash.delete(:notice)) %></div>');
+		$("#fancybox-content div:first").prepend('<div class="flash notice" style="display: none"><%= escape_javascript(flash[:notice]) %></div>');
 		fbFlashNotice();
 		showFBPopUp("<%= escape_javascript(@wager.user.display_name) %> just bet that he is right and you are wrong!", "<%= escape_javascript(@wager.bet.description) %>", "<%= escape_javascript(@wager.bet.title) %>", "<%= APP_CONFIG['facebook_url'] %>", "View bet");
 	<% else %>
-		$("#container").prepend('<div class="flash notice" style="display: none"><%= escape_javascript(flash.delete(:notice)) %></div>');
+		$("#container").prepend('<div class="flash notice" style="display: none"><%= escape_javascript(flash[:notice]) %></div>');
 		flashNotice();
 		showFBPopUp("<%= escape_javascript(@wager.user.display_name) %> just bet that he is right and you are wrong!", "<%= escape_javascript(@wager.bet.description) %>", "<%= escape_javascript(@wager.bet.title) %>", "<%= url_for(:only_path => false, :controller => 'bets', :action => 'show', :id => @wager.bet.id) %>", "View bet")
 	<% end %>
