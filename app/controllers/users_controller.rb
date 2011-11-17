@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end  
   
   def friends
-    @users = current_user.friends.where("display_name ILIKE ?", "%#{params[:q]}%")
+    @users = current_user.friends.where("LOWER(display_name) LIKE ?", "%#{params[:q].downcase}%")
     respond_to do |format|
       format.html
       format.json { render :json => @users.map { |val| val.to_simple_array} }
