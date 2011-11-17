@@ -1,1 +1,0 @@
-clientSideValidations.validators.remote.valid_date=function(a,b){if($.ajax({url:"/validators/valid_date.json",data:{id:a.val()},async:false}).status==404)return b.message}
