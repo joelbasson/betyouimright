@@ -64,7 +64,7 @@ class Bet < ActiveRecord::Base
   end
   
   def private_bet_has_chanllengee
-    errors.add(:challengee, "You need add a challengee") if (visibility == "Private" && challengee.nil?)
+    errors.add_to_base("You need add a challengee") if (visibility == "Private" && challengee.nil?)
   end
   
   def validity_status
