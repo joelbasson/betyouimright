@@ -6,7 +6,7 @@
 				<a href="<%= url_for current_user.wallet %>" title="<%= distance_of_time_in_words(Time.now, current_user.wallet.pointtime) %>">
 					<div class="points-outer">
 			  			<div class="left points-inner" style="width:<%= current_user.wallet.rel_time_to_more_credits %>px;"></div>
-					<div class="points-text very-small-text italics">Time till next free credits</div>
+					<div class="points-text very-small-text italics">Time till next free credit</div>
 			  		</div>
 				</a>
 			</div>
