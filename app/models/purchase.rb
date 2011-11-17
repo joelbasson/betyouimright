@@ -6,7 +6,7 @@ class Purchase < ActiveRecord::Base
   validates_acceptance_of :terms
   validates_numericality_of :amount, 
              :less_than_or_equal_to => 100, 
-             :greater_than_or_equal_to => 2, 
+             :greater_than_or_equal_to => 1, 
              :only_integer => true
   
   def assign_credit_value

@@ -16,6 +16,20 @@ $(function() {
 		}
 	});
 	
+	$('.wager-links a').live('click', function(){
+		if (!confirm("Are you sure?"))
+		{
+			return false;
+		}
+		else
+		{
+			$.getScript(this.href);
+			$("#bet-wager-details").addClass("pulsedHighlight");
+			return false;
+		}
+	});
+	
+	
 	$(".trigger").live('click', function(){
 		$(".sliding-panel").slideToggle();
 		$(this).toggleClass("active");

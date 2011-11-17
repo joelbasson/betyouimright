@@ -73,14 +73,14 @@
 		<div class="wager-links standard-padding">
 			<% if user_signed_in? %>
 				<% if !@bet.wager_by_user(current_user) %>
-					<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %> or <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " credit that he's right", bet_now_path(@bet, :against => 'false'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+					<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :class => "red-text" %> or <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " credit that he's right", bet_now_path(@bet, :against => 'false'), :class => "red-text" %>
 				<% elsif @bet.wager_by_user(current_user).against == true %>
-					<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+					<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :class => "red-text" %>
 				<% elsif @bet.wager_by_user(current_user).against == false %>	
 					<% if @bet.user == current_user %>
-						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that you're right", bet_now_path(@bet, :against => 'false'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that you're right", bet_now_path(@bet, :against => 'false'), :class => "red-text" %>
 					<% else %>
-						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's right", bet_now_path(@bet, :against => 'false'), :confirm => 'Are you sure?', :class => "red-text", :remote => true %>
+						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's right", bet_now_path(@bet, :against => 'false'), :class => "red-text" %>
 					<% end %>
 				<% end %>
 			<% else %>

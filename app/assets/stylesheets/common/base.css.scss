@@ -1367,6 +1367,29 @@ a.facebook-button-link, .facebook-buttons
     }
 }
 
+.pulsedHighlight
+{
+   -webkit-animation-name: pulse2;
+   -webkit-animation-duration: 1.5s;
+   -webkit-animation-iteration-count: 3;
+   -webkit-animation-timing-function: ease-in-out;
+ }
+
+@-webkit-keyframes pulse2 {
+    0% {
+      background-color: #FFF;
+    }
+    33% {
+      background-color: #fafced;
+    }
+    67% {
+      background-color: #fffcde;
+    }
+    100% {
+      background-color: #fff696;
+    }
+}
+
 .top-categories
 {
 	width:43%;

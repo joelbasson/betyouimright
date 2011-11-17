@@ -56,9 +56,9 @@ production:
   application_name: BetYouImRight
   human_application_name: Bet you I'm right
   domain_name: betyouimright.com
-  buy_credit_value: 5.0
-  sell_credit_value: 3.0
-  minimum_purchase: 2
+  buy_credit_value: 1.0
+  sell_credit_value: 0.7
+  minimum_purchase: 1
   default_currency: $
   default_currency_code: USD
   admin_email: joelbasson@me.com
