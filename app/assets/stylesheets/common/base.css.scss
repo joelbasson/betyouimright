@@ -1779,3 +1779,50 @@ div.purchase div
 {
 	z-index:9999 !important;
 }
+
+.wager-links
+{
+	text-align: center;
+	
+	.action {
+		margin: 20px 5px 0 5px;
+		display: inline-block;
+		width: 225px;
+		color: #666;
+		text-align: center;
+		font-size: .8em;
+	}
+
+	.action a {
+		display: block;
+		color: white;
+		font-size: 1.5em;
+		padding: 8px 14px 9px;
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-weight: 600;
+		background: url(/assets/button-background.png) repeat-x;
+		color: white;
+		text-decoration: none;
+		-moz-border-radius: 30px;
+		-webkit-border-radius: 30px;
+		-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+		-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+		border: 1px solid rgba(0, 0, 0, 0.35);
+		position: relative;
+		cursor: pointer;
+		line-height: normal;
+		margin-bottom: 10px;
+	}
+	
+	.action a.green {
+		background-color: #29BD29;
+	}
+	
+	.action a.blue {
+		background-color: #4381C6;
+	}
+	
+	
+}
+
