@@ -1,4 +1,5 @@
 Betyouimright::Application.routes.draw do
+  break if ARGV.join.include? 'assets:precompile'
   
   ActiveAdmin.routes(self)
 
