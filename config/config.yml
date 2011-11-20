@@ -16,7 +16,8 @@ development:
   facebook_host: localhost:3000
   use_fb_comments: true
   allow_cashouts: false
-  fb_app_id: 104465769636132
+  fb_app_id: 282540421784684
+  fb_app_secret: cacc9160f10ae8853b7e7772f0183ec5
   application1_name: BetYouImRight USA
   application2_name: BetYouImRight South Africa
   application2_url: http://www.betyouimright.co.za/
@@ -45,6 +46,7 @@ test:
   use_fb_comments: true
   allow_cashouts: false
   fb_app_id: 104465769636132
+  fb_app_secret: cacc9160f10ae8853b7e7772f0183ec5
   application1_name: BetYouImRight USA
   application2_name: BetYouImRight South Africa
   application2_url: http://www.betyouimright.co.za/
@@ -73,6 +75,7 @@ production:
   use_fb_comments: true
   allow_cashouts: false
   fb_app_id: 104465769636132
+  fb_app_secret: cacc9160f10ae8853b7e7772f0183ec5
   application1_name: BetYouImRight USA
   application2_name: BetYouImRight South Africa
   application2_url: http://www.betyouimright.co.za/

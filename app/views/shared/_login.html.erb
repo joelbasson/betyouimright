@@ -13,7 +13,7 @@
 		</div>
 		<div class="left separator"></div><!-- Signed in as <%= current_user.email %>. Not you? -->
 		<div id="login-nav" class="left">
-      		<%= link_to "Sign out", destroy_user_session_path, :method => :delete, :title => "Signed in as " + current_user.display_name %>
+      		<%= link_to "Sign out", logout_path, :title => "Signed in as " + current_user.display_name %>
 		</div>
     <% else %>
 		<div id="login-nav" class="left">

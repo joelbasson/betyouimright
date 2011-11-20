@@ -62,8 +62,12 @@ Betyouimright::Application.routes.draw do
   resources :transactions, :only => [:index]
   resources :bragging, :only => [:index]
   
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
+    get '/users/sign_out' => 'users#destroy'
+  end
+    
   match '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  match '/users/logout' => 'users#logout', :as => "logout"
   # match '/auth/:provider/callback' => 'authentications#create'  
   # match '/auth/failure', :to => 'authentications#failure'
   match '/transactions/my_transactions' => 'transactions#my_transactions', :as => :my_transactions

@@ -28,5 +28,16 @@ class UsersController < ApplicationController
       format.json { render :json => @users.map { |val| val.to_simple_array} }
     end
   end
+  
+  def logout
+    sign_out current_user
+    redirect_to root_url
+  end
+  
+private
+  
+  def find_user
+    @user ||= User.find(params[:user_id])
+  end
     
 end
