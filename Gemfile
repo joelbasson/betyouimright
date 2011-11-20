@@ -10,6 +10,7 @@ group :production do
 end
 group :development, :test do
   gem 'sqlite3'
+  gem 'rails_best_practices', :git => 'git://github.com/flyerhzm/rails_best_practices.git'
 end
 
 
