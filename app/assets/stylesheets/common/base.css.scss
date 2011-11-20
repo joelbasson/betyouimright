@@ -1,13 +1,9 @@
-@font-face {
-    font-family: 'IrishGroverRegular';
-    src: font-url('irishgrover-webfont.eot');
-    src: font-url('irishgrover-webfont.eot?#iefix') format('embedded-opentype'),
-         font-url('irishgrover-webfont.woff') format('woff'),
-         font-url('irishgrover-webfont.ttf') format('truetype'),
-         font-url('irishgrover-webfont.svg#IrishGroverRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+@font-face
+  font-family: 'IrishGroverRegular'
+  src: font-url('irishgrover-webfont.eot')
+  src: local('IrishGroverRegular'), font-url('irishgrover-webfont.eot?#iefix') format("embedded-opentype"), font-url('irishgrover-webfont.woff') format("woff"), font-url('irishgrover-webfont.ttf') format("truetype"), font-url('irishgrover-webfont.svg#MerriweatherRegular') format("svg")
+  font-weight: normal
+  font-style: normal
 
 body {
   padding:0 0 0 0;
