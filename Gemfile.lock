@@ -244,7 +244,7 @@ GEM
     sprockets (2.1.1)
       hike (~> 1.2)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
+      tilt (!= 1.3.0, ~> 1.1)
     sqlite3 (1.3.4)
     squeel (0.9.3)
       activerecord (~> 3.0)
@@ -273,7 +273,7 @@ DEPENDENCIES
   activeadmin!
   activemerchant
   client_side_validations (= 3.0.5)
-  coffee-rails (~> 3.1.0)
+  coffee-rails (~> 3.1.1)
   dalli
   devise!
   exception_notification!
@@ -295,9 +295,9 @@ DEPENDENCIES
   rails_best_practices!
   rakismet
   ransack!
-  sass-rails (~> 3.1.0)
+  sass-rails (~> 3.1.5.rc.2)
   sqlite3
   squeel
   turn
-  uglifier
+  uglifier (>= 1.0.3)
   will_paginate (= 3.0.pre2)

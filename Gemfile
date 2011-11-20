@@ -8,6 +8,7 @@ gem 'rails', '3.1.2'
 group :production do
   gem 'pg'
 end
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rails_best_practices', :git => 'git://github.com/flyerhzm/rails_best_practices.git'
