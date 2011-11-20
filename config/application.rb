@@ -52,6 +52,9 @@ module Betyouimright
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.paths << Rails.root.join("app", "assets", "images")
+    
     config.rakismet.key = '9f0e50d42801'
     config.rakismet.url = 'http://www.betyouimright.com/'
   end
