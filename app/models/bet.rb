@@ -67,65 +67,43 @@ class Bet < ActiveRecord::Base
     errors.add("errors", "You need add a challengee") if (visibility == "Private" && challengee.nil?)
   end
   
-  def validity_status
-    if self.status == "Undecided" && self.end_date < Time.now
-      return "Pending"
-    else
-      return self.status
-    end
+  def challengee_token=(ids)
+      self.challengee_id = ids
   end
     
   def set_defaults(currentuser)
     self.end_date = 3.days.from_now
     self.wager_amount = 1
     self.user  = currentuser
-  end  
-  
-  def total_wagers
-    if self.wagers.size < 1
-      return 1
-    else
-      return self.wagers.size
-    end    
-  end  
-    
-  def total_value
-    if self.wagers.size < 1
-      return self.wager_amount
-    else
-      self.wagers.sum(:credits)  
-    end  
-  end  
+  end
   
   def to_param
     "#{id}-#{title.parameterize}"
+  end  
+  
+  def wagers_cached
+    @wagers_cached ||= Rails.cache.fetch("bet-#{id}-wagers-results", :expires_in => 1.day) {
+      wagers.all 
+    }
   end
   
-  def assign_winnings(result)
-    totalamount = self.wagers.sum(:credits).to_i
-    totalamount += bonus_credits("Winners")
-    if (result)
-      creatorpoints = bonus_credits("Bet Creator")
-      if creatorpoints > 0
-        user.notifications.create!(:title => "You were awarded #{creatorpoints} bonus credits", :message => "You were awarded #{creatorpoints} bonus credits for the following bet - #{title}")
-        user.wallet.add_points(creatorpoints)
-      end
-      indv_amount = totalamount / self.wagers.wagers_for.size 
-    else
-      indv_amount = totalamount /  self.wagers.wagers_against.size if result == false 
-    end  
-    for wager in self.wagers
-      if (wager.against != result)
-        wager.user.wallet.add_points(1)   
-        wager.user.wallet.add_credits(indv_amount)
-        wager.user.wallet.transactions.create!(:description => "Won #{indv_amount.to_s} credits")
-      else (wager.against == result)  
-        wager.user.wallet.add_points(-1) 
-      end
-      ActionController::Base.new.expire_fragment('mystats-' + wager.user.id.to_s)
-    end  
-    ActionController::Base.new.expire_fragment('bragging')
+  def total_wagers
+    @total_wagers ||= wagers_cached.size  
   end  
+    
+  def total_value
+    @total_value ||= Rails.cache.fetch("bet-#{id}-wagers-value", :expires_in => 1.day) { 
+      wagers_cached.sum(&:credits)
+    }
+  end  
+  
+  def validity_status
+    if self.status == "Undecided" && self.end_date < Time.now
+      return "Pending"
+    else
+      return status
+    end
+  end 
   
   def winning_wagers
     winners = Array.new
@@ -145,22 +123,29 @@ class Bet < ActiveRecord::Base
       end  
     end  
     return losers
-  end   
+  end    
   
-  def add_topic
-    topic = Forum.first.topics.build(:title => self.title, :body => (ActionController::Base.helpers.content_tag :blockquote, self.description) + "\n view BETID#{self.id}BETID" )
-    topic.user = self.user
-    topic.bet = self
-    topic.save
-  end  
+  def wagers_for
+    @wagers_for ||= Rails.cache.fetch("bet-#{id}-wagers-for", :expires_in => 1.day) {
+      wagers.wagers_for.all  
+    }
+  end
+  
+  def wagers_against
+    @wagers_against ||= Rails.cache.fetch("bet-#{id}-wagers-against", :expires_in => 1.day) {
+      wagers.wagers_against.all  
+    }
+  end
   
   def most_wagers
-    Wager.find(
-       :all, 
-       :select => 'count(*) as amount, user_id', 
-       :group => 'user_id', 
-       :conditions => ['bet_id = ?', self.id ], 
-       :limit => 1).first
+    @most_wagers ||= Rails.cache.fetch("bet-#{id}-most-wagers", :expires_in => 1.day) {
+        Wager.find(
+           :all, 
+           :select => 'count(*) as amount, user_id', 
+           :group => 'user_id', 
+           :conditions => ['bet_id = ?', id ], 
+           :limit => 1).first 
+    }
   end
   
   def wager_by_user(user)
@@ -207,8 +192,37 @@ class Bet < ActiveRecord::Base
     return bonuscredits
   end
   
-  def challengee_token=(ids)
-      self.challengee_id = ids
+  def assign_winnings(result)
+    totalamount = self.wagers.sum(:credits).to_i
+    totalamount += bonus_credits("Winners")
+    if (result)
+      creatorpoints = bonus_credits("Bet Creator")
+      if creatorpoints > 0
+        user.notifications.create!(:title => "You were awarded #{creatorpoints} bonus credits", :message => "You were awarded #{creatorpoints} bonus credits for the following bet - #{title}")
+        user.wallet.add_points(creatorpoints)
+      end
+      indv_amount = totalamount / self.wagers.wagers_for.size 
+    else
+      indv_amount = totalamount /  self.wagers.wagers_against.size if result == false 
+    end  
+    for wager in self.wagers
+      if (wager.against != result)
+        wager.user.wallet.add_points(1)   
+        wager.user.wallet.add_credits(indv_amount)
+        wager.user.wallet.transactions.create!(:description => "Won #{indv_amount.to_s} credits")
+      else (wager.against == result)  
+        wager.user.wallet.add_points(-1) 
+      end
+      ActionController::Base.new.expire_fragment('mystats-' + wager.user.id.to_s)
+    end  
+    ActionController::Base.new.expire_fragment('bragging')
+  end
+  
+  def add_topic
+    topic = Forum.first.topics.build(:title => self.title, :body => (ActionController::Base.helpers.content_tag :blockquote, self.description) + "\n view BETID#{self.id}BETID" )
+    topic.user = self.user
+    topic.bet = self
+    topic.save
   end
     
 end

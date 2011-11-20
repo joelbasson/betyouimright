@@ -1,13 +1,12 @@
 @font-face {
     font-family: 'IrishGroverRegular';
-    src: url('irishgrover-webfont.eot');
-    src: url('irishgrover-webfont.eot?#iefix') format('embedded-opentype'),
-         url('irishgrover-webfont.woff') format('woff'),
-         url('irishgrover-webfont.ttf') format('truetype'),
-         url('irishgrover-webfont.svg#IrishGroverRegular') format('svg');
+    src: font-url('irishgrover-webfont.eot');
+    src: font-url('irishgrover-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('irishgrover-webfont.woff') format('woff'),
+         font-url('irishgrover-webfont.ttf') format('truetype'),
+         font-url('irishgrover-webfont.svg#IrishGroverRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 body {
@@ -47,7 +46,7 @@ h1
 
 #logo
 {
-	display:none;;
+	display:none;
 }
 
 #logo-title
@@ -805,7 +804,7 @@ font-family: verdana, helvetica, arial, sans-serif;
 color:#fff;
 padding: 5px 15px 8px 40px;
 font-weight: 700;
-background:#333333 url(/assets/plus.png) 15% 30% no-repeat;
+background:#333333 image-url("plus.png") 15% 30% no-repeat;
 border:1px solid #444444;
 -moz-border-radius-topleft: 0px;
 -webkit-border-top-left-radius: 0px;
@@ -829,7 +828,7 @@ font-family: verdana, helvetica, arial, sans-serif;
 color:#fff;
 padding: 5px 15px 12px 40px;
 font-weight: 700;
-background:#222222 url(/assets/plus.png) 15% 30% no-repeat;
+background:#222222 image-url("plus.png") 15% 30% no-repeat;
 border:1px solid #444444;
 -moz-border-radius-topleft: 0px;
 -webkit-border-top-left-radius: 0px;
@@ -843,7 +842,7 @@ display: block;
 }
 
 a.active.trigger {
-background:#222222 url(/assets/minus.png) 15% 55% no-repeat;
+background:#222222 image-url("/minus.png") 15% 55% no-repeat;
 }
 
 .columns{
@@ -1800,7 +1799,7 @@ div.purchase div
 		padding: 8px 14px 9px;
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-weight: 600;
-		background: url(/assets/button-background.png) repeat-x;
+		background: image-url("/button-background.png") repeat-x;
 		color: white;
 		text-decoration: none;
 		-moz-border-radius: 30px;

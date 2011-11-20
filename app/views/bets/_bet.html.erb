@@ -7,7 +7,7 @@
 			<div class="bet-end-date"><%= ending(bet) %></div>
 			<div class="bet-wager-info">
 				<div class="bet-wager-amount">Current Value : <%= bet.total_value %> Credits</div>
-				<div class="bet-wager-amount"><%= pluralize(bet.wagers.wagers_for.size, "bet") %> for - <%= pluralize(bet.wagers.wagers_against.size, "bet") %> against</div>
+				<div class="bet-wager-amount"><%= pluralize(bet.wagers_for.size, "bet") %> for - <%= pluralize(bet.wagers_against.size, "bet") %> against</div>
 			</div>
 			<div class="bet-display-name-line red-text"><span class="bet-display-name"><%= link_to bet.user.display_name, publicprofile_path(bet.user) %></span> <%= taunt(bet) %></div>
 			<div class="bet-view-link"><%= link_to "View >>", bet, :title => "Show details of " + bet.title + " bet"  %></div>

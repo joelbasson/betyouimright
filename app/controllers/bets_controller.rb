@@ -94,7 +94,7 @@ class BetsController < ApplicationController
     if request.post? && is_facebook?
       redirect_to :action => 'index', :bet => @bet.to_param
     else
-      @wagers = @bet.wagers.order("user_id DESC, id DESC")
+      @wagers = @bet.wagers_cached.order("user_id DESC, id DESC")
       @comments = @bet.comments.paginate(:per_page => Comment.per_page, :page => params[:page])
       respond_with(@bet) do |format|
         format.fb { render :layout => false }

@@ -36,7 +36,7 @@
 		<% if user_signed_in? %>
 			<%= link_to "Private Bets", private_bets_path, :remote => true %>
 		<% else %>
-			<%= link_to "Private Bets", root_url(:subdomain => false) + "auth/facebook"  %>
+			<%= link_to "Private Bets", user_omniauth_authorize_path(:facebookcanvas)  %>
 		<% end %>
 	</div>
 </div>

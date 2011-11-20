@@ -8,7 +8,7 @@
 	<div class="bet-end-date">Ends <%= @bet.end_date.strftime("%a %d %b %Y") %></div>
 	<div class="bet-wager-info">
 		<div class="bet-wager-amount">Total bets : <%= @bet.total_wagers %> worth <%= @bet.total_value %> credits</div>
-		<div class="bet-wager-amount"><%= @bet.wagers.wagers_for.size %> bets for - <%= @bet.wagers.wagers_against.size %> bets against</div>
+		<div class="bet-wager-amount"><%= @bet.wagers_for.size %> bets for - <%= @bet.wagers_against.size %> bets against</div>
 		<div class="bet-wager-amount">Default wager amount : <%= @bet.wager_amount %> credits</div>
 	</div>
 </div>

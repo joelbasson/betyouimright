@@ -4,17 +4,17 @@ class Bonus < ActiveRecord::Base
   def get_status(bet)
     case bonustype
       when "Ratio" then
-        ratio = (bet.wagers.wagers_for.size / bet.wagers.wagers_against.size) rescue 0
+        ratio = (bet.wagers_for.size / bet.wagers_against.size) rescue 0
         if ratio >= target
           "Activated"
         else
           "#{ratio} of #{target} completed"
         end
       when "WagersTotal" then
-        if bet.wagers.size >= target
+        if bet.wagers_cached.size >= target
           "Activated"
         else
-          "#{bet.wagers.size} of #{target} completed"
+          "#{bet.wagers_cached.size} of #{target} completed"
         end
       else
         ""
