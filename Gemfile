@@ -50,6 +50,7 @@ gem "activemerchant"
 gem 'heroku'
 gem "heroku_dj_auto_scale"
 gem 'rakismet'
+gem 'newrelic_rpm'
 # gem 'community'
 # gem 'mongrel'
 gem 'httparty'
@@ -58,7 +59,7 @@ gem "exception_notification", :git => "http://github.com/rails/exception_notific
 gem "fb_graph"
 gem 'activeadmin', :git  => "https://github.com/gregbell/active_admin.git"
 gem 'rack' , '1.3.5'
-gem "newrelic_rpm"
+
 
 
 group :test do
