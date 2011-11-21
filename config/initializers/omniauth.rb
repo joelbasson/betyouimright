@@ -113,10 +113,6 @@ module OmniAuth
         end
       end
       
-      def full_host
-        APP_CONFIG["canvas_url"]
-      end
-      
       private
       
       def prune!(hash)
