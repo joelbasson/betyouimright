@@ -113,6 +113,10 @@ module OmniAuth
         end
       end
       
+      def full_host
+        APP_CONFIG["canvas_url"]
+      end
+      
       private
       
       def prune!(hash)
@@ -124,3 +128,11 @@ module OmniAuth
     end
   end
 end
+
+# if Rails.env.production?
+#   OmniAuth.config.full_host = "http://localhost:3000"
+# elsif Rails.env.test?
+#   OmniAuth.config.full_host = "http://apps.facebook.com/betyouimright"
+# elsif Rails.env.development?
+#   OmniAuth.config.full_host = "http://apps.facebook.com/betyouimright"
+# end
