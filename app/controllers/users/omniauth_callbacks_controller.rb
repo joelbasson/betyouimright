@@ -23,7 +23,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to APP_CONFIG['canvas_url']
       else
         session["devise.facebook_data"] = env["omniauth.auth"]
-        redirect_to new_user_registration_url
+        redirect_to APP_CONFIG['canvas_url']
       end
       
   end
