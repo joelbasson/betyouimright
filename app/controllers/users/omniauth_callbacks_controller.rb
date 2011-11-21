@@ -18,11 +18,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       if @user.persisted?
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
+        puts "JOEL 1 => " + APP_CONFIG['canvas_url'] + "BASSON"
         sign_in @user, :event => :authentication
 
         redirect_to APP_CONFIG['canvas_url']
       else
         session["devise.facebook_data"] = env["omniauth.auth"]
+        puts "JOEL 2 => " + APP_CONFIG['canvas_url'] + "BASSON"
         redirect_to APP_CONFIG['canvas_url']
       end
       

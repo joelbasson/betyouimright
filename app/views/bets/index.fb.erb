@@ -1,6 +1,7 @@
 <% title "Latest Bets", show_title = false %>
 
 <div class="intro-text">
+	<%= user_omniauth_callback_path(:facebookcanvas) %>
 	Arguing with someone that thinks they're right when they're not? Tell them to put their money where their mouth is! Tell them "<%= APP_CONFIG["human_application_name"] %>!" Create your bet, put some credits on it, and dare them to bet against you. You can each bet as many times as you want, and other people can join in if they want. <br />
 	Win more Credits to bet with, build your Bragging Score and show the world who is always right! <%= link_to "How to play", "/how", :class => "fb-fancybox" %>
 </div>	
