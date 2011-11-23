@@ -81,6 +81,11 @@ module ApplicationHelper
       css_class = (column == sort_column) ? "current #{sort_direction}" : nil  
       direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"  
       link_to title, {:sort => column, :direction => direction}, {:class => css_class}  
-    end
+  end
+  
+  def create_credits_html
+    msg = link_to "Credits " + current_user.wallet.credits.to_s, current_user.wallet(:subdomain => false), :title => "View Account", :class => "fb-fancybox"
+    return raw(msg)
+  end
   
 end
