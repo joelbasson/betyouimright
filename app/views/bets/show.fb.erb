@@ -12,10 +12,14 @@
 				<%= render 'bet_wager_details.html.erb' %>
 			</div>
 			<div class="bet-generic-line left simple-clear"><%= fb_most_confident(@bet) %></div>
-			<div class="bet-verify-description left simple-clear">How to verify bet : <%= @bet.verify_description %></div>	
-			<div class="bet-display-name left simple-clear"><%= link_to @bet.user.display_name, publicprofile_path(@bet.user), :remote => true %> <%= taunt(@bet) %></div>
+			<div class="bet-verify-description left simple-clear">How to verify bet : <%= @bet.verify_description %></div>
+			<div class="bet-display-name left simple-clear">Challenger : <%= link_to @bet.user.display_name, publicprofile_path(@bet.user), :remote => true %></div>
 			<% if @bet.visibility == "Private" %>
-				<div class="bet-display-name left simple-clear">Challengee : <%= link_to @bet.challengee.display_name, publicprofile_path(@bet.challengee) %></div>
+				<% if @bet.judge %>
+					<div class="bet-display-name left simple-clear">Judge : <%= link_to @bet.judge.display_name, publicprofile_path(@bet.judge), :remote => true %></div>	
+				<% end %>			
+				<div class="bet-display-name left simple-clear">Challengee : <%= link_to @bet.challengee.display_name, publicprofile_path(@bet.challengee), :remote => true %></div>	
+				<div class="bet-display-name left simple-clear winner">Winner : <%= link_to @bet.winner.display_name, publicprofile_path(@bet.winner), :remote => true if @bet.finished? %></div>	
 			<% end %>
 			<div class="right simple-clear facebook-buttons">
 				<div id="d_clip_container" style="position:relative" class="left">
@@ -45,23 +49,30 @@
 	<% end %>
 	
 	<div class="clear"></div>
-	
-	<% if @bet.validity_status == "Undecided" && @bet.confirmed == true %>
+
+	<% if @bet.confirmed == true %>
 	
 		<div class="wager-links standard-padding">
 			<% if user_signed_in? %>
-				<% if !@bet.wager_by_user(current_user) %>
+				<% if @bet.judge == current_user && @bet.validity_status == "Pending" %>
+					<div class="action">
+						<%= link_to "Confirm " + @bet.user.display_name + " as the winner", won_bet_path(@bet), :class => "button green" %>
+					</div>
+					<div class="action">
+					 	<%= link_to "Confirm " + @bet.challengee.display_name + " as the winner", lost_bet_path(@bet), :class => "button blue" %>
+					</div>
+				<% elsif !@bet.wager_by_user(current_user) && @bet.validity_status == "Undecided" %>
 					<div class="action">
 						<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :class => "button green" %>
 					</div>
 					<div class="action">
-					 <%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " credit that he's right", bet_now_path(@bet, :against => 'false'), :class => "button blue" %>
+						<%= link_to "Bet " + pluralize(@bet.wager_amount, "credit") + " credit that he's right", bet_now_path(@bet, :against => 'false'), :class => "button blue" %>
 					</div>
-				<% elsif @bet.wager_by_user(current_user).against == true %>
+				<% elsif @bet.wager_by_user(current_user).against == true && @bet.validity_status == "Undecided" %>
 					<div class="action">
 						<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that he's wrong", bet_now_path(@bet, :against => 'true'), :class => "button green" %>
 					</div>
-				<% elsif @bet.wager_by_user(current_user).against == false %>	
+				<% elsif @bet.wager_by_user(current_user).against == false && @bet.validity_status == "Undecided" %>	
 					<% if @bet.user == current_user %>
 						<div class="action">
 							<%= link_to "Bet another " + pluralize(@bet.wager_amount, "credit") + " that you're right", bet_now_path(@bet, :against => 'false'), :class => "button blue" %>

@@ -9,4 +9,10 @@
 //= require jquery_ujs
 //= require rails.validations
 //= require rails.validations.custom
-//= require_directory .
+//= require base
+//= require jquery.easing-1.3.pack
+//= require jquery.fancybox-1.3.4
+//= require jquery.mousewheel-3.0.4.pack
+//= require ZeroClipboard
+//= require jquery.tokeninput
+//= require custom/facebook

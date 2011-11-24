@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/flyerhzm/rails_best_practices.git
-  revision: c45a7d15924703fca4dd3b1474d1c6d96e9c7f16
+  revision: fd20355e661893986671e11ab429e10d946f88c6
   specs:
     rails_best_practices (1.4.0)
       activesupport
@@ -34,9 +34,9 @@ GIT
 
 GIT
   remote: https://github.com/gregbell/active_admin.git
-  revision: 49ff1e47ef7ea1efe2903896daa2193f5f2d75da
+  revision: 4306ee345d814e0b8b09290bbdd839510ba639f5
   specs:
-    activeadmin (0.3.3)
+    activeadmin (0.3.4)
       devise (>= 1.1.2)
       fastercsv
       formtastic (>= 2.0.0)
@@ -48,9 +48,9 @@ GIT
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: 582f00ed95a7a226634d477b9950f5b8fb10451c
+  revision: 0c67cff2a02d5e6b998da2b5cc4c10e534f25c44
   specs:
-    devise (1.5.0)
+    devise (1.5.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
@@ -105,8 +105,7 @@ GEM
     braintree (2.13.1)
       builder (>= 2.0.0)
     builder (3.0.0)
-    client_side_validations (3.0.5)
-      activesupport
+    client_side_validations (3.1.3)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
       railties (~> 3.1.0)
@@ -175,7 +174,7 @@ GEM
       i18n (~> 0.4)
     multi_json (1.0.3)
     multi_xml (0.4.1)
-    multipart-post (1.1.3)
+    multipart-post (1.1.4)
     newrelic_rpm (3.3.0)
     nifty-generators (0.4.6)
     oauth2 (0.5.1)
@@ -194,7 +193,7 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
-    progressbar (0.9.1)
+    progressbar (0.9.2)
     rack (1.3.5)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -241,10 +240,10 @@ GEM
       sass (~> 3.1.10)
       tilt (~> 1.3.2)
     sexp_processor (3.0.8)
-    sprockets (2.1.1)
+    sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
-      tilt (!= 1.3.0, ~> 1.1)
+      tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.4)
     squeel (0.9.3)
       activerecord (~> 3.0)
@@ -272,7 +271,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   activemerchant
-  client_side_validations (= 3.0.5)
+  client_side_validations
   coffee-rails (~> 3.1.1)
   dalli
   devise!

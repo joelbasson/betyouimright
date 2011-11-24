@@ -5,8 +5,7 @@
 	<meta name="description" content="The USA's favourite friendly betting site. Bet people that you are right about something and show them who is Mr Always Right" />
 	<meta name="keywords" content="Betting, Right, Wager, Prove, Brag" />
 	<%= stylesheet_link_tag    "facebook" %>
-    <%= javascript_include_tag "application" %>
-	<script src="/javascripts/facebook.js" type="text/javascript" charset="utf-8" ></script>
+    <%= javascript_include_tag "fb-application" %>
 	<meta property="fb:app_id" content="<%= APP_CONFIG["fb_app_id"] %>" />
 	<meta property="og:title" content="<%= APP_CONFIG["human_application_name"] %>" />
 	<meta property="og:type" content="cause" />
@@ -36,7 +35,10 @@
 		      		<%= yield %>
 				</div>
 				<div class="clear"></div>
+				<%= render 'shared/friends_list' %>
+				<div class="clear"></div>
 		    </div>	
+		
 			<div class="line"></div>
 			<div class="footer">
 				<div>

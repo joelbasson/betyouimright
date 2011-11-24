@@ -2,16 +2,23 @@
   <%= f.inputs do %>
 	<%= f.input :title, :input_html => { :placeholder => "e.g The ANC will beat the DA in the 2011 Joburg local election" } %>
 	<%= f.input :description, :input_html => { :rows => 10, :cols => 50, :maxlength => 500, :placeholder => "e.g The ANC will beat the DA in the 2011 local elections for the Johannesburg council" } %>
-	<%= f.input :visibility, :as => :select, :collection => [["Public", "Public"], ["Private", "Private"]], :include_blank => false %>
+	<% if false %>
+		<%= f.input :visibility, :as => :select, :collection => [["Private", "Private"], ["Public", "Public"]], :include_blank => false %>
+	<% end %>	
 	<% if @bet.challengee %>
-		<%= f.input :challengee_token, :as => :string, :input_html => { "data-pre" =>  "[" + @bet.challengee.to_simple_array.to_json + "]", :class => "bet_challengee_token", :style => "visibility:true;" } %>
+		<%= f.input :challengee_token, :as => :string, :input_html => { "data-pre" =>  "[" + @bet.challengee.to_simple_array.to_json + "]", :class => "bet_challengee_token" } %>
 	<% else %>
 		<%= f.input :challengee_token, :as => :string, :label => "Challengee", :input_html => { "data-pre" =>  "[]", :class => "bet_challengee_token" } %>
 	<% end %>
 	<%= f.input :bet_category, :collection => BetCategory.order("id ASC"), :include_blank => false  %>
 	<%= f.input :end_date, :as => :string %>
 	<%= f.input :wager_amount, :as => :hidden %>	
-	<%= f.input :verify_description, :label => "Verification", :hint => "Describe how we can verify the winner", :input_html => { :rows => 10, :cols => 50, :maxlength => 500, :placeholder => "e.g Check on http://www.elections.org.za/ the day after elections" } %>
+	<%= f.input :verify_description, :label => "Verification", :hint => "Describe how the Judge can verify the winner", :input_html => { :rows => 10, :cols => 10, :maxlength => 500, :placeholder => "e.g Check on http://www.elections.org.za/ the day after elections" } %>
+	<% if @bet.judge %>
+		<%= f.input :judge_token, :as => :string, :label => "Judge", :input_html => { "data-pre" =>  "[" + @bet.judge.to_simple_array.to_json + "]", :class => "bet_judge_token" } %>
+	<% else %>
+		<%= f.input :judge_token, :as => :string, :label => "Judge", :input_html => { "data-pre" =>  "[]", :class => "bet_judge_token" } %>
+	<% end %>
 	<% if current_user.try(:admin?) %>	
 			<%= f.input :confirmed %>
 			<%= f.input :status, :as => :select, :collection => [["Undecided", "Undecided"], ["Won", "Won"], ["Lost", "Lost"]], :include_blank => false %>

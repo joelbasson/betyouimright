@@ -1,7 +1,7 @@
 <div id="user_nav">
 	<% if user_signed_in? %>
 		<div id="credit-nav" class="left">
-      		<div><%= link_to "Credits " + current_user.wallet.credits.to_s, current_user.wallet(:subdomain => false), :title => "View Account" %></div>
+      		<div class='credit-nav-link'><%= create_credits_html %></div>
 			<div>
 				<a href="<%= url_for current_user.wallet %>" title="<%= distance_of_time_in_words(Time.now, current_user.wallet.pointtime) %>">
 					<div class="points-outer">

@@ -3,6 +3,7 @@ class BetsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :public, :show, :feed]
   before_filter :authenticate_admin, :only => [:edit, :update, :destroy]
   before_filter :find_bet, :except => [:index, :public, :private, :search, :new, :create, :my_bets, :feed]
+  before_filter :authenticate_judge, :only => [:won, :lost]
   before_filter :check_time_to_credit, :only => [:index, :show]
   before_filter :check_facebook_canvas, :only => [:index, :show]
   helper_method :sort_column, :sort_direction  
@@ -104,9 +105,7 @@ class BetsController < ApplicationController
 
   def new
     @bet = Bet.new
-    pp current_user
     @bet.set_defaults(current_user)
-    pp @bet
     respond_with(@bet) do |format|
       format.fb { render :layout => false }
     end
@@ -114,9 +113,10 @@ class BetsController < ApplicationController
 
   def create
     @bet = Bet.new(params[:bet])
-    if current_user.admin? || @bet.visibility == "Private"
+    @bet.visibility = "Private"
+    # if current_user.admin? || @bet.visibility == "Private"
       @bet.confirmed = true
-    end  
+    # end  
     @bet.user = current_user
     @bet.wager_amount = 1
     if @bet.save
@@ -125,9 +125,9 @@ class BetsController < ApplicationController
       @bet.user.wallet.transactions.create!(:description => "Created Bet for #{@bet.wager_amount.to_s} credits.", :bet_id => @bet)
       @bet.add_topic
       Mailer.delay.new_bet(@bet)
-      if @bet.visibility == "Private"
+      # if @bet.visibility == "Private"
         Mailer.delay.new_challenge(@bet)
-      end  
+      # end  
       flash[:notice] = "Successfully created bet."
       respond_with(@bet)
     else
@@ -178,6 +178,28 @@ class BetsController < ApplicationController
     end
   end
   
+  def won
+    if (@bet.validity_status == "Pending" && @bet.confirmed && @bet.wagers.wagers_against.size > 0 && @bet.wagers.wagers_for.size > 0)
+      @bet.status = "Won"
+      @bet.save
+      @bet.assign_winnings(@bet.status == "Won")
+      respond_with(@bet, :notice => "Successfully updated bet.")
+    else
+      respond_with(@bet, :notice => "Failed to update bet.")
+    end
+  end
+  
+  def lost
+    if (@bet.validity_status == "Pending" && @bet.confirmed && @bet.wagers.wagers_against.size > 0 && @bet.wagers.wagers_for.size > 0)
+      @bet.status = "Lost"
+      @bet.save
+      @bet.assign_winnings(@bet.status == "Won")
+      respond_with(@bet, :notice => "Successfully updated bet.")
+    else
+      respond_with(@bet, :notice => "Failed to update bet.")
+    end
+  end
+  
   private 
   
   def find_bet
@@ -190,6 +212,13 @@ class BetsController < ApplicationController
     
   def sort_direction  
     params[:direction] || "asc"  
+  end
+  
+  def authenticate_judge
+    authenticate_user!
+    unless current_user == find_bet.judge
+      redirect_to :back, :notice => "You are not authorized for that"
+    end  
   end
   
 end

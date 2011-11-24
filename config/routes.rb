@@ -54,7 +54,11 @@ Betyouimright::Application.routes.draw do
         get 'search'
         get 'public'
         get 'private'
-      end
+    end
+    member do
+        get 'won', :as => "won"
+        get 'lost', :as => "lost"
+    end
     resources :wagers, :except => [:index, :show, :create, :new, :destroy]
     resources :comments
   end  

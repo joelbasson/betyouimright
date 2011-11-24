@@ -16,9 +16,13 @@
 			</div>
 			<div class="bet-generic-line left simple-clear"><%= most_confident(@bet) %></div>
 			<div class="bet-verify-description left simple-clear">How to verify bet : <%= @bet.verify_description %></div>	
-			<div class="bet-display-name left simple-clear"><%= link_to @bet.user.display_name, publicprofile_path(@bet.user) %> <%= taunt(@bet) %></div>
+			<div class="bet-display-name left simple-clear">Challenger : <%= link_to @bet.user.display_name, publicprofile_path(@bet.user) %></div>
 			<% if @bet.visibility == "Private" %>
-				<div class="bet-display-name left simple-clear">Challengee : <%= link_to @bet.challengee.display_name, publicprofile_path(@bet.challengee) %></div>
+				<% if @bet.judge %>
+					<div class="bet-display-name left simple-clear">Judge : <%= link_to @bet.judge.display_name, publicprofile_path(@bet.judge) %></div>	
+				<% end %>			
+				<div class="bet-display-name left simple-clear">Challengee : <%= link_to @bet.challengee.display_name, publicprofile_path(@bet.challengee) %></div>	
+				<div class="bet-display-name left simple-clear">Winner : <%= link_to @bet.winner.display_name, publicprofile_path(@bet.winner) if @bet.finished? %></div>	
 			<% end %>	
 			<div class="right simple-clear facebook-buttons">
 				<div id="d_clip_container" style="position:relative" class="left">

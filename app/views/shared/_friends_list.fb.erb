@@ -1,0 +1,10 @@
+<div id="friends-list" class="friends">
+	<% if user_signed_in? %>
+	<h3>Your friends</h3>
+	<ul>
+		<% current_user.friends.by_scores.limit(5).each do |user| %>
+			<li><%= link_to image_tag(user.profile, :alt => user.display_name, :width => 30, :height => 30) + user.display_name, publicprofile_path(user), :title => user.display_name  %></li>
+		<% end %>
+	</ul>	
+	<% end %>
+</div>

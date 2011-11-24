@@ -1,4 +1,4 @@
-$(".credit-nav-link").html('<%= escape_javascript(create_credits_html) %>');
+$("#user_nav").replaceWith("<%= escape_javascript(render 'shared/login') %>")
 $("#fancybox-content .center-inner").replaceWith("<%= escape_javascript(render :file => 'bets/show.fb.erb') %>");
 $("#fancybox-content").prepend('<%= escape_javascript(create_flash_messages(flash, true)) %>');
 flashNotice();

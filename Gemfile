@@ -54,7 +54,7 @@ gem 'newrelic_rpm'
 # gem 'community'
 # gem 'mongrel'
 gem 'httparty'
-gem 'client_side_validations', '3.0.5' 
+gem 'client_side_validations'
 gem "exception_notification", :git => "http://github.com/rails/exception_notification.git", :require => 'exception_notifier'
 gem "fb_graph"
 gem 'activeadmin', :git  => "https://github.com/gregbell/active_admin.git"

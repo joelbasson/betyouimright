@@ -11,7 +11,7 @@ $(function() {
 			'autoDimensions' : false,
 			'width'           : '650',
 			'height'          : '700'
-		})
+		});
 	});
 
 	$(".pagination a").live("click", function() {	

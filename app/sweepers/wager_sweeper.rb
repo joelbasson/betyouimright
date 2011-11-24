@@ -19,10 +19,10 @@ class WagerSweeper < ActionController::Caching::Sweeper
     expire_fragment("bet-#{wager.bet.id}")
     expire_fragment("bet-#{wager.bet.id}")
     expire_fragment("bet-#{wager.bet.id}-wagers")
-    expire_fragment("bet-#{wager.bet.id}-wagers-results")
-    expire_fragment("bet-#{wager.bet.id}-wagers-value")
-    expire_fragment("bet-#{wager.bet.id}-wagers-for")
-    expire_fragment("bet-#{wager.bet.id}-wagers-against")
+    Rails.cache.delete("bet-#{wager.bet.id}-wagers-results")
+    Rails.cache.delete("bet-#{wager.bet.id}-wagers-value")
+    Rails.cache.delete("bet-#{wager.bet.id}-wagers-for")
+    Rails.cache.delete("bet-#{wager.bet.id}-wagers-against")
     expire_fragment("bet-#{wager.bet.id}-bonus-panel")
   end
 end

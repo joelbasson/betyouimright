@@ -24,7 +24,6 @@ $(function() {
 		else
 		{
 			$.getScript(this.href);
-			$("#bet-wager-details").addClass("pulsedHighlight");
 			return false;
 		}
 	});
@@ -137,15 +136,15 @@ $(function() {
 			return false;
 		});
 		
-		$("#bet_visibility").live('change', function(){
-			if ($("#bet_visibility").val() == "Private"){
-				$("#bet_challengee_token_input").slideDown();
-				initPersonAutocomplete();
-			}
-			else{
-				$("#bet_challengee_token_input").hide();
-			}
-		});
+		// $("#bet_visibility").live('change', function(){
+		// 	if ($("#bet_visibility").val() == "Private"){
+		// 		$("#bet_challengee_token_input").slideDown();
+		// 		initPersonAutocomplete();
+		// 	}
+		// 	else{
+		// 		$("#bet_challengee_token_input").hide();
+		// 	}
+		// });
 		
 		// $("#bet_challengee_token").tokenInput("/users/friends.json", {
 		//     crossDomain: false,
@@ -157,11 +156,28 @@ $(function() {
 		// 	noResultsText: "No results",
 		// 	searchingText: "Searching..."
 		//  });
+		
+		$("#token-input-bet_challengee_token").live('focusout', function(){
+			if ($("#bet_challengee_token").val() == ''){
+				if ($("#bet_challengee_token_input p.inline-errors").length == 0){
+					$("#bet_challengee_token_input").append("<p class='inline-errors'>A challengee is required</p>")
+				}	
+			}
+			else{
+				$("#bet_challengee_token_input p.inline-errors").remove();
+			}
+			
+		});
 });
 
 function flashNotice() {
-  	var flash = $('.flash');
-	  if (flash.length > 0) {
+	if ($('#fancybox-content .flash').length > 0){
+		var flash = $('#fancybox-content .flash:first');
+	}
+	else{
+  		var flash = $('.flash');
+	}
+	if (flash.length > 0) {
 		if (($("#traditional").length>0) && (flash.text() != "You need to sign in or sign up before continuing."))
 		{
 			$("#traditional").show();
@@ -170,12 +186,12 @@ function flashNotice() {
 		// {
 		// 	createNewBetPopUp();
 		// }
-	    flash.show().animate({height: flash.outerHeight()}, 300);
+	   flash.show().animate({height: flash.outerHeight()}, 300);
 
-	    window.setTimeout(function() {
-	      flash.slideUp();
-	    }, 3000);
-	  }
+	   window.setTimeout(function() {
+	     flash.slideUp();
+	   }, 3000);
+	}
 };
 
 function createNewBetPopUp(){
@@ -281,6 +297,7 @@ function bindCalendar(){
 				 });
 			 }
 		});
+		initPersonAutocomplete();
 	}
 };
 
@@ -288,6 +305,16 @@ function initPersonAutocomplete(){
 	$("#bet_challengee_token").tokenInput("/users/friends.json", {
 	    crossDomain: false,
 	    prePopulate: $("#bet_challengee_token").data("pre"),
+	    theme: "facebook", 
+		minChars: 3, 
+		tokenLimit: 1,
+		hintText: "Begin typing the user name of the person you wish to assign.",
+		noResultsText: "No results",
+		searchingText: "Searching..."
+	 });
+	$("#bet_judge_token").tokenInput("/users/friends.json", {
+	    crossDomain: false,
+	    prePopulate: $("#bet_judge_token").data("pre"),
 	    theme: "facebook", 
 		minChars: 3, 
 		tokenLimit: 1,

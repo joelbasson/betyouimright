@@ -7,19 +7,21 @@ class Wallet < ActiveRecord::Base
   validates_numericality_of :credits
     
   def add_points(points)
-    self.score += points
-    if points == 1
-      award = award_level
-      if award && !self.awards.exists?(award)
-        self.awards << award      
-      end  
-    elsif points == -1   
-      award = next_award_level
-      if award && self.awards.exists?(award)
-        self.awards.delete(award)      
+    if (self.score > 0 || points > 0)
+      self.score += points
+      if points == 1
+        award = award_level
+        if award && !self.awards.exists?(award)
+          self.awards << award      
+        end  
+      elsif points == -1   
+        award = next_award_level
+        if award && self.awards.exists?(award)
+          self.awards.delete(award)      
+        end
       end
+      self.save
     end
-    self.save
   end
   
   def award_level

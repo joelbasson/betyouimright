@@ -6,8 +6,10 @@ class Bet < ActiveRecord::Base
   has_one :topic
   belongs_to :bet_category
   belongs_to :challengee, :class_name => "User", :foreign_key => "challengee_id"
-  attr_accessible :title, :description, :visibility, :bet_category_id, :end_date, :wager_amount, :verify_description, :verified, :confirmed, :user_id, :wagers_count, :status, :challengee, :challengee_token
+  belongs_to :judge, :class_name => "User", :foreign_key => "judge_id"
+  attr_accessible :title, :description, :visibility, :bet_category_id, :end_date, :wager_amount, :verify_description, :verified, :confirmed, :user_id, :wagers_count, :status, :challengee, :challengee_token, :judge, :judge_token
   attr_reader :challengee_token
+  attr_reader :judge_token
   validates_numericality_of :wager_amount, 
              :less_than_or_equal_to => 20, 
              :greater_than_or_equal_to => 1, 
@@ -17,7 +19,8 @@ class Bet < ActiveRecord::Base
   validates :verify_description, :presence => true, :length => { :minimum => 20, :maximum => 500 }
   validates :end_date, :presence => true, :valid_date => true, :on => :create
   validate :wager_amount_is_valid_amount
-  validate :private_bet_has_chanllengee
+  validate :private_bet_has_challengee
+  validate :private_bet_has_judge
   scope :standard, :order => "verified ASC, end_date DESC", :conditions => ["confirmed = ?", true] 
   scope :public_bets, :order => "verified ASC", :conditions => ["confirmed = ? AND visibility = ?", true, "Public"]  
   scope :unconfirmed, :order => "created_at DESC", :conditions => ["confirmed = ? AND visibility = ?", false, "Public"]  
@@ -63,18 +66,27 @@ class Bet < ActiveRecord::Base
     errors.add("errors", "You need at least 1 credit to create a bet. Please purchase more credits") if (wager_amount > user.wallet.credits )
   end
   
-  def private_bet_has_chanllengee
+  def private_bet_has_challengee
     errors.add("errors", "You need add a challengee") if (visibility == "Private" && challengee.nil?)
+  end
+  
+  def private_bet_has_judge
+    errors.add("errors", "You need add a judge") if (visibility == "Private" && judge.nil?)
   end
   
   def challengee_token=(ids)
       self.challengee_id = ids
+  end
+  
+  def judge_token=(ids)
+      self.judge_id = ids
   end
     
   def set_defaults(currentuser)
     self.end_date = 3.days.from_now
     self.wager_amount = 1
     self.user  = currentuser
+    self.visibility = "Private"
   end
   
   def to_param
@@ -104,6 +116,20 @@ class Bet < ActiveRecord::Base
       return status
     end
   end 
+  
+  def finished?
+    status == "Won" || status == "Lost"
+  end
+  
+  def winner
+    if finished?
+      if status == "Won"
+        return user
+      elsif status == "Lost"
+        return challengee
+      end   
+    end
+  end
   
   def winning_wagers
     winners = Array.new
@@ -203,7 +229,7 @@ class Bet < ActiveRecord::Base
       end
       indv_amount = totalamount / self.wagers.wagers_for.size 
     else
-      indv_amount = totalamount /  self.wagers.wagers_against.size if result == false 
+      indv_amount = totalamount /  self.wagers.wagers_against.size
     end  
     for wager in self.wagers
       if (wager.against != result)

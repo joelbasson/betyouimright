@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103203818) do
+ActiveRecord::Schema.define(:version => 20111123233624) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer   "resource_id",   :null => false
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20111103203818) do
     t.integer   "comments_count",     :default => 0
     t.string    "visibility"
     t.integer   "challengee_id"
+    t.integer   "judge_id"
   end
 
   add_index "bets", ["bet_category_id"], :name => "index_bets_on_bet_category_id"

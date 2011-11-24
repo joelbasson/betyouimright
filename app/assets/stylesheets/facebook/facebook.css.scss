@@ -169,10 +169,10 @@ form.formtastic fieldset, form.formtastic fieldset > ol > li {
 	display: none !important;
 }
 
-#fancybox-content, #fancybox-content > div
-{
-	height:800px !important;
-}
+//#fancybox-content, #fancybox-content > div
+//{
+//	height:850px !important;
+//}
 
 .back
 {
@@ -253,7 +253,7 @@ p.inline-errors
 	background-color: #ffebe8;
     border: 1px solid #dd3c10;
     color: #333333 !important;
-    padding: 10px !important;
+    padding: 5px !important;
     font-size: 10px;
     font-weight: bold;
 	width: 250px !important;
@@ -283,3 +283,88 @@ a.trigger, a.trigger:hover, .sliding-panel {
 top: 73px;
 }
 
+#container-right
+{
+	float:left;
+	width:100%;
+	height:100px;
+	padding-top:50px;
+}
+
+#friends-list
+{
+	
+}
+
+.image-gallery {
+	
+	padding-left :10px;
+	padding-right:3px;
+	float:left;
+	
+	.image-gallery-photo {
+		float:left;
+		margin-left :2px;
+		margin-right:5px;
+		margin-top:5px;
+		padding:5px;
+		
+		-webkit-transition: -webkit-transform .15s linear;
+		-webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+		-moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+	}
+	
+	h3{
+		text-align:center;
+	}
+
+}
+.friends
+{
+	margin-right: 7px;
+	width: 172px;
+	
+	h3 {
+	color: #646464;
+	font-weight: bold;
+	font-size: 11px;
+	line-height: 29px;
+	text-align: center;
+	}
+	
+	ol, ul {
+	list-style: none;
+	}
+	
+	ul {
+	padding: 0 4px;
+	}
+	
+	li {
+	background-repeat: no-repeat !important;
+	background-position: 0 0 !important;
+	color: #7C7C7C !important;
+	display: block !important;
+	font-size: 11px !important;
+	font-weight: bold !important;
+	height: 32px !important;
+	margin-bottom: 11px !important;
+	overflow: hidden !important;
+	position: relative !important;
+	}
+	
+	li a:link, li a:visited {
+	color: #7C7C7C !important;
+	display: block !important;
+	line-height: 32px !important;
+	padding-left: 36px !important;
+	}
+	
+	img {
+	height: auto;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 32px;
+	}
+}
