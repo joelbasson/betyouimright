@@ -16,7 +16,7 @@ class PurchasesController < ApplicationController
   end
   
   def new
-    @purchase = Purchase.new(:amount => 2)
+    @purchase = Purchase.new(:amount => 10)
   end
   
   def create
